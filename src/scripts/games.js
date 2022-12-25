@@ -120,6 +120,8 @@ var vm = function () {
         self.activate(pg);
     }
     console.log("VM initialized!");
+
+    
 };
 
 $(document).ready(function () {
@@ -130,3 +132,4 @@ $(document).ready(function () {
 $(document).ajaxComplete(function (event, xhr, options) {
     $("#myModal").modal('hide');
 })
+
