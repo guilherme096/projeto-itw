@@ -43,58 +43,60 @@
         </nav>
         <!-- Working Area -->
         <div class="container">
-            <div class="border-bottom py-2 mb-2">
-                <h2 data-bind="text:displayName"></h2>
+            <div class="py-2 border-bottom mb-3">
+                <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
             </div>
-            <!-- ko if:records().length > 0 -->
-            <div class="row small">
-                <p class="col-4 mr-auto pt-2">
-                    <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                    <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
-                </p>
-                <div class="col-8 my-0 pt-3">
-                    <ul class="pagination float-end">
-                        <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
-                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'athletes.html?page=' + '1',  rel:'prev'}">⇤</a></li>
-                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'athletes.html?page=' + previousPage(),  rel:'prev'}">←</a></li>
-                        <!-- /ko -->
-                        <!-- ko foreach: pageArray()-->
-                        <!-- ko if:$data == $parent.currentPage() -->
-                        <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
-                        <!-- /ko -->
-                        <!-- ko if:$data != $parent.currentPage() -->
-                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'athletes.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
-                        <!-- /ko -->
-                        <!-- /ko -->
-                        <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
-                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'athletes.html?page=' + nextPage(), rel:'next' }">→</a></li>
-                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'athletes.html?page=' + totalPages() }">⇥</a></li>
-                        <!-- /ko -->
-                    </ul>
+            <!-- ko if:Name().length > 0 -->
+            <div class="row border-bottom mx-0 my-1">
+                <div class="col-2">Id</div>
+                <div class="col-10" data-bind="text: Id"></div>
+            </div>
+            <div class="row border-bottom mx-0 my-1">
+                <div class="col-2">Name</div>
+                <div class="col-10" data-bind="text: Name"></div>
+            </div>
+            <div class="row border-bottom mx-0 my-1" data-bind="visible: Photo() != '' && Photo() != null">
+                <div class="col-2">Photo</div>
+                <div class="small col-10">
+                    <img class="img-thumbnail" data-bind="attr:{src: Photo}" /><br />
+                    <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
                 </div>
+            </div>
+            <div class="row border-bottom mx-0 my-1">
+                <div class="col-2">Sex</div>
+                <div class="col-10" data-bind="text: Sex"></div>
+            </div>
+            <div class="row border-bottom mx-0 my-1" data-bind="visible: Height() != '' && Height() != null && Height() != 'NA'">
+                <div class="col-2">Height</div>
+                <div class="col-10" data-bind="text: Height"></div>
+            </div>
+            <div class="row border-bottom mx-0 my-1" data-bind="visible: Weight() != '' && Weight() != null && Weight() != 'NA'">
+                <div class="col-2">Weight</div>
+                <div class="col-10" data-bind="text: Weight"></div>
+            </div>
+            <div class="row border-bottom mx-0 my-1" data-bind="visible: BornDate() != '' && BornDate() != null">
+                <div class="col-2">BornDate</div>
+                <div class="col-10" data-bind="text: BornDate"></div>
+            </div>
+            <div class="row border-bottom mx-0 my-1" data-bind="visible: BornPlace() != '' && BornPlace() != null">
+                <div class="col-2">BornPlace</div>
+                <div class="col-10" data-bind="text: BornPlace"></div>
+            </div>
+            <div class="row border-bottom mx-0 my-1" data-bind="visible: DiedDate() != '' && DiedDate() != null">
+                <div class="col-2">DiedDate</div>
+                <div class="col-10" data-bind="text: DiedDate"></div>
+            </div>
+            <div class="row border-bottom mx-0 my-1" data-bind="visible: DiedPlace() != '' && DiedPlace() != null">
+                <div class="col-2">DiedPlace</div>
+                <div class="col-10" data-bind="text: DiedPlace"></div>
+            </div>
+            <div class="row border-bottom mx-0 my-1" data-bind="visible: OlympediaLink() != '' && OlympediaLink() != null">
+                <div class="col-2">Olympedia Link</div>
+                <div class="col-10" data-bind="text: OlympediaLink"><i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]</div>
             </div>
             <!-- /ko -->
-
-            <div class="row row-cols-4" data-bind="foreach: records">
-                <div class="card mb-3" style="max-width: 540px">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img data-bind="attr:{src: Photo}" class="img-fluid rounded-start" alt="..." />
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title" data-bind="text:Name">Card title</h5>
-                                <p class="card-text" data-bind="text: 'Sexo: ' + Sex"></p>
-                                <p class="card-text">
-                                    <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./athleteDetails.html?id=' + Id }">
-                                        <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <a href="./athletes.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+            <a data-bind="attr: { href:'./athleteFull.html?id=' + Id() }" class="btn btn-default btn-sm small"><i class="fa fa-th"></i> Full Setails</a>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -122,6 +124,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="./scripts/athletes.js"></script>
+        <script src="./scripts/athleteDetails.js"></script>
     </body>
 </html>

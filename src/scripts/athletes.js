@@ -1,35 +1,63 @@
+// ViewModel KnockOut
 var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
     self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/athletes');
-    self.displayName = 'Olympic Games edition Details';
+
+    self.displayName = 'Olympic Athletes List';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
-    //--- Data Record
-    self.Id = ko.observable('');
-    self.CountryName = ko.observable('');
-    self.Logo = ko.observable('');
-    self.Name = ko.observable('');
-    self.Photo = ko.observable(data["Records"][0]["Name"]);
-    self.Season = ko.observable('');
-    self.Year = ko.observableArray('');
-    self.Url = ko.observable('');
+    self.records = ko.observableArray([]);
+    self.currentPage = ko.observable(1);
+    self.pagesize = ko.observable(20);
+    self.totalRecords = ko.observable(50);
+    self.hasPrevious = ko.observable(false);
+    self.hasNext = ko.observable(false);
+    self.previousPage = ko.computed(function () {
+        return self.currentPage() * 1 - 1;
+    }, self);
+    self.nextPage = ko.computed(function () {
+        return self.currentPage() * 1 + 1;
+    }, self);
+    self.fromRecord = ko.computed(function () {
+        return self.previousPage() * self.pagesize() + 1;
+    }, self);
+    self.toRecord = ko.computed(function () {
+        return Math.min(self.currentPage() * self.pagesize(), self.totalRecords());
+    }, self);
+    self.totalPages = ko.observable(0);
+    self.pageArray = function () {
+        var list = [];
+        var size = Math.min(self.totalPages(), 9);
+        var step;
+        if (size < 9 || self.currentPage() === 1)
+            step = 0;
+        else if (self.currentPage() >= self.totalPages() - 4)
+            step = self.totalPages() - 9;
+        else
+            step = Math.max(self.currentPage() - 5, 0);
+
+        for (var i = 1; i <= size; i++)
+            list.push(i + step);
+        return list;
+    };
 
     //--- Page Events
     self.activate = function (id) {
-        console.log('CALL: getGame...');
-        var composedUri = self.baseUri() + id;
+        console.log('CALL: getGames...');
+        var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
             hideLoading();
-            self.Id(data.Id);
-            self.CountryName(data.CountryName);
-            self.Logo(data.Logo);
-            self.Name(data.Name);
-            self.Photo(data.Photo);
-            self.Season(data.Season);
-            self.Year(data.Year);
+            self.records(data.Records);
+            self.currentPage(data.CurrentPage);
+            self.hasNext(data.HasNext);
+            self.hasPrevious(data.HasPrevious);
+            self.pagesize(data.PageSize)
+            self.totalPages(data.TotalPages);
+            self.totalRecords(data.TotalRecords);
+            //self.SetFavourites();
         });
     };
 
@@ -50,8 +78,13 @@ var vm = function () {
         });
     }
 
+    function sleep(milliseconds) {
+        const start = Date.now();
+        while (Date.now() - start < milliseconds);
+    }
+
     function showLoading() {
-        $('#myModal').modal('show', {
+        $("#myModal").modal('show', {
             backdrop: 'static',
             keyboard: false
         });
@@ -67,7 +100,7 @@ var vm = function () {
             sURLVariables = sPageURL.split('&'),
             sParameterName,
             i;
-
+        console.log("sPageURL=", sPageURL);
         for (i = 0; i < sURLVariables.length; i++) {
             sParameterName = sURLVariables[i].split('=');
 
@@ -79,7 +112,7 @@ var vm = function () {
 
     //--- start ....
     showLoading();
-    var pg = getUrlParameter('id');
+    var pg = getUrlParameter('page');
     console.log(pg);
     if (pg == undefined)
         self.activate(1);
@@ -87,20 +120,16 @@ var vm = function () {
         self.activate(pg);
     }
     console.log("VM initialized!");
+
+    
 };
 
-
-$.get("http://192.168.160.58/Olympics/api/athletes", function (data) {
-    
-    var name = data["Records"][0]["Name"];    
-    var sex = data["Records"][0]["Sex"];
-    if(sex == "M"){
-        sex = "Masculino";
-    }else{
-        sex = "Feminino";
-    }
-
-    var photo = data["Records"][0]["Photo"];
-    
-    $("#content").html('<div class="card mb-3" style="max-width: 540px;"><div class="row g-0"><div class="col-md-4"><img src="'+photo+'" class="img-fluid rounded-start" alt="Foto de '+name+'"></div><div class="col-md-8"><div class="card-body"><h5 class="card-title">'+name+'</h5><p class="card-text">'+sex+'</p><p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p></div></div></div></div>');
+$(document).ready(function () {
+    console.log("ready!");
+    ko.applyBindings(new vm());
 });
+
+$(document).ajaxComplete(function (event, xhr, options) {
+    $("#myModal").modal('hide');
+})
+
