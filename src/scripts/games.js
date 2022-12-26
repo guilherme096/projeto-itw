@@ -9,6 +9,7 @@ var vm = function () {
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     self.records = ko.observableArray([]);
+    self.years = ko.observableArray([]);
     self.currentPage = ko.observable(1);
     self.pagesize = ko.observable(20);
     self.totalRecords = ko.observable(50);
@@ -42,15 +43,41 @@ var vm = function () {
             list.push(i + step);
         return list;
     };
+    self.view = ko.observable('timeline');
+
+    // Function to toggle the view
+    self.toggleTable = function () {
+        self.view('table');
+    };
+    self.toggleTimeline = function () {
+        self.view('timeline');
+    };
 
     //--- Page Events
     self.activate = function (id) {
         console.log('CALL: getGames...');
         var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
         ajaxHelper(composedUri, 'GET').done(function (data) {
-            console.log(data);
             hideLoading();
             self.records(data.Records);
+            self.years(ko.computed(function () {
+                var years = [];
+                for (var i = 0; i < self.records().length; i++) {
+                    //check if the element is already in the array
+                    if (years.indexOf(self.records()[i].Year) == -1){
+                        var year_s = {name: self.records()[i].Year.toString(), games: 
+                            // get all games for that year
+                            ko.utils.arrayFilter(self.records(), function (item) {
+                                return item.Year == self.records()[i].Year;
+                            })
+
+                        };
+                        years.push(year_s);
+                    }
+                }
+                console.log(years);
+                return years;
+            }, self))
             self.currentPage(data.CurrentPage);
             self.hasNext(data.HasNext);
             self.hasPrevious(data.HasPrevious);
@@ -121,7 +148,7 @@ var vm = function () {
     }
     console.log("VM initialized!");
 
-    
+
 };
 
 $(document).ready(function () {
