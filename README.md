@@ -1,4 +1,4 @@
 # Projeto itw
 
-##Bugs
+## Bugs
 - view type nao persiste ao mudar de pagina
