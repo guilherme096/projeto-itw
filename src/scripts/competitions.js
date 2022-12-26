@@ -45,8 +45,11 @@ var vm = function () {
     self.view = ko.observable('card');
 
     // Function to toggle the view
-    self.toggleView = function() {
-      self.view(self.view() === 'card' ? 'table' : 'card');
+    self.toggleTable = function() {
+      self.view('table');
+    };
+    self.toggleCard = function() {
+      self.view('card');
     };
 
     //--- Page Events

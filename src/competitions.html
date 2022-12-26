@@ -54,8 +54,8 @@
                     <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
                 </p>
                 <div class="btn-group col-1 ms-auto" role="group" aria-label="View options" style="display: flex; align-items: center;">
-                    <button type="button" class="btn btn-primary btn-sm" data-bind="click: toggleView, css: { 'active': view() === 'card' }"><i class="fa-solid fa-table"></i></button>
-                    <button type="button" class="btn btn-primary btn-sm" data-bind="click: toggleView, css: { 'active': view() === 'table' }"><i class="fa-solid fa-list"></i></button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bind="click: toggleCard, css: { 'active': view() === 'card' }"><i class="fa-solid fa-table"></i></button>
+                    <button type="button" class="btn btn-primary btn-sm" data-bind="click: toggleTable, css: { 'active': view() === 'table' }"><i class="fa-solid fa-list"></i></button>
                   </div>
             </div>
             
@@ -69,26 +69,26 @@
                     </div>
                 </div>
             </div>
+            <table data-bind="visible: view() === 'table'" class="table mx-auto" style="margin-left: 20px; margin-right: 20px;">
+                <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Modality</th>
+                      <th scope="col">Results</th>
+                    </tr>
+                  </thead>
+                  <tbody  data-bind="foreach: records">
+                    <tr>
+                        <td scope="row" data-bind="text:Id"></th>
+                        <td data-bind="text: Name"></td>
+                        <td data-bind="text: Modality"></td>
+                        <td data-bind="text: Results"></td>
+                    </tr>
+                  </tbody>
+                
+                </table>
         </div>
-        <table data-bind="visible: view() === 'table'" class="table">
-            <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Modality</th>
-                  <th scope="col">Results</th>
-                </tr>
-              </thead>
-              <tbody  data-bind="foreach: records">
-                <tr>
-                    <td scope="row" data-bind="text:Id"></th>
-                    <td data-bind="text: Name"></td>
-                    <td data-bind="text: Modality"></td>
-                    <td data-bind="text: Results"></td>
-                </tr>
-              </tbody>
-            
-            </table>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
