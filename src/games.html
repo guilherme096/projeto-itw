@@ -66,7 +66,16 @@
                 <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
                 <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
             </p>
-            <div class="col-8 my-0 pt-3">
+            <div class="btn-group col-1 ms-auto" role="group" aria-label="View options"
+                style="display: flex; align-items: center;">
+                <button type="button" class="btn btn-primary btn-sm"
+                    data-bind="click: toggleTimeline, css: { 'active': view() === 'timeline' }"><i
+                        class="fa-solid fa-table"></i></button>
+                <button type="button" class="btn btn-primary btn-sm"
+                    data-bind="click: toggleTable, css: { 'active': view() === 'table' }"><i
+                        class="fa-solid fa-list"></i></button>
+            </div>
+            <div class="my-0 pt-3 ms-auto col-2">
                 <ul class="pagination float-end">
                     <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
                     <li class="page-item float-end"><a class="page-link" title="First Page"
@@ -120,14 +129,16 @@
                                         style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInLeft;">
                                         <p data-bind="text: name"></p>
                                     </div>
-                                    <div class="row" >
+                                    <div class="row">
                                         <!-- ko foreach: games -->
                                         <div class="col-12 col-md-6 col-lg-4">
                                             <div class="single-timeline-content d-flex wow fadeInLeft"
                                                 data-wow-delay="0.3s"
                                                 style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
-                                                <div class="timeline-icon"><i class="fa fa-address-card"
-                                                        aria-hidden="true"></i></div>
+                                                <div class="timeline-icon" style="background-color: transparent;"><img
+                                                        style="max-width: 100%;max-height: 100%;"
+                                                        data-bind="attr:{src: flagUrl}" crossorigin="anonymous" /></svg>
+                                                </div>
                                                 <div class="timeline-text">
                                                     <h6 data-bind="text: Name"></h6>
                                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
@@ -140,11 +151,11 @@
                             </div>
                             <!-- /ko -->
                         </div>
-               
+
                     </div>
                 </div>
         </section>
-        <!-- <table class="table table-striped table-sm small" data-bind="visible: view() === 'table'">
+        <table class="table table-striped table-sm small" data-bind="visible: view() === 'table'">
             <thead class="bg-dark text-light">
                 <tr>
                     <th scope="col">Id</th>
@@ -174,7 +185,7 @@
                     </td>
                 </tr>
             </tbody>
-        </table> -->
+        </table>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -211,7 +222,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
         integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./scripts/games.js"></script>
+    <script src="./scripts/games.js" type="module"></script>
 </body>
 
 </html>

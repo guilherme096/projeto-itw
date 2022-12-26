@@ -1,4 +1,5 @@
-﻿// ViewModel KnockOut
+﻿import {flagCodes} from './flagCodes.js';
+// ViewModel KnockOut
 var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
@@ -70,8 +71,11 @@ var vm = function () {
                             ko.utils.arrayFilter(self.records(), function (item) {
                                 return item.Year == self.records()[i].Year;
                             })
-
                         };
+                        // for each game in year_s add a property with the country code
+                        for (var j = 0; j < year_s.games.length; j++) {
+                            year_s.games[j].flagUrl = 'https://countryflagsapi.com/png/' + flagCodes[year_s.games[j].CountryName];
+                        }
                         years.push(year_s);
                     }
                 }
