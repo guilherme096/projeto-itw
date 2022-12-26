@@ -42,6 +42,12 @@ var vm = function () {
             list.push(i + step);
         return list;
     };
+    self.view = ko.observable('card');
+
+    // Function to toggle the view
+    self.toggleView = function() {
+      self.view(self.view() === 'card' ? 'table' : 'card');
+    };
 
     //--- Page Events
     self.activate = function (id) {
