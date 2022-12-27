@@ -1,4 +1,5 @@
-﻿// ViewModel KnockOut
+﻿import { flagCodes } from './flagCodes.js';
+// ViewModel KnockOut
 var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
@@ -9,6 +10,7 @@ var vm = function () {
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     self.records = ko.observableArray([]);
+    self.years = ko.observableArray([]);
     self.currentPage = ko.observable(1);
     self.pagesize = ko.observable(20);
     self.totalRecords = ko.observable(50);
@@ -42,15 +44,45 @@ var vm = function () {
             list.push(i + step);
         return list;
     };
+    self.view = ko.observable('timeline');
+
+    // Function to toggle the view
+    self.toggleTable = function () {
+        self.view('table');
+    };
+    self.toggleTimeline = function () {
+        self.view('timeline');
+    };
 
     //--- Page Events
     self.activate = function (id) {
         console.log('CALL: getGames...');
         var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
         ajaxHelper(composedUri, 'GET').done(function (data) {
-            console.log(data);
             hideLoading();
             self.records(data.Records);
+            self.years(ko.computed(function () {
+                var years = [];
+                for (var i = 0; i < self.records().length; i++) {
+                    // check if already exists on object with the name of the year
+                    if (!years.filter(function (e) { return e.name == self.records()[i].Year; }).length > 0) {
+                        console.log("Year=", self.records()[i].Year);
+                        var year_s = {
+                            name: self.records()[i].Year.toString(), games:
+                                // get all games for that year
+                                ko.utils.arrayFilter(self.records(), function (item) {
+                                    return item.Year == self.records()[i].Year;
+                                })
+                        };
+                        // for each game in year_s add a property with the country code
+                        for (var j = 0; j < year_s.games.length; j++) {
+                            year_s.games[j].flagUrl = 'https://countryflagsapi.com/png/' + flagCodes[year_s.games[j].CountryName];
+                        }
+                        years.push(year_s);
+                    }
+                }
+                return years;
+            }, self))
             self.currentPage(data.CurrentPage);
             self.hasNext(data.HasNext);
             self.hasPrevious(data.HasPrevious);
@@ -121,7 +153,7 @@ var vm = function () {
     }
     console.log("VM initialized!");
 
-    
+
 };
 
 $(document).ready(function () {
