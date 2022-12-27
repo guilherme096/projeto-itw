@@ -12,6 +12,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./styles/myCSS.css" />
         <link rel="stylesheet" href="./styles/theme.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+        <style>
+            #map {
+                height: 500px;
+            }
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -23,13 +29,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="athletes.html"><i class="fa fa-user-o text-warning"></i> Athletes</a>
+                            <a class="nav-link" aria-current="page" href="athletes.html"><i class="fa fa-user-o text-warning"></i> Athletes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i> Competitions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="countries.html"><i class="fa fa-flag-o text-danger"></i> Countries</a>
+                            <a class="nav-link active" aria-current="page" href="countries.html"><i class="fa fa-flag-o text-danger"></i> Countries</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="games.html"><i class="fa fa-map-marker text-success"></i> Games</a>
@@ -41,74 +47,9 @@
                 </div>
             </div>
         </nav>
-        <!-- Working Area -->
-        <div class="container">
-            <div class="row">
-                <div class="col-6 border-bottom py-2 mb-2">
-                    <h2 data-bind="text:displayName"></h2>
-                </div>
-                <div class="col-6 border-bottom py-2 mb-2">
-                    <div class="float-end input-group">
-                        <div class="form-outline">
-                            <input type="search" id="form1" class="form-control" />
-                        </div>
-                        <button type="button" class="btn btn-primary" style="height: 40px">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <!-- ko if:records().length > 0 -->
-            <div class="row small">
-                <p class="col-4 mr-auto pt-2">
-                    <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                    <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
-                </p>
-                <div class="col-8 my-0 pt-3">
-                    <ul class="pagination float-end">
-                        <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
-                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'athletes.html?page=' + '1',  rel:'prev'}">⇤</a></li>
-                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'athletes.html?page=' + previousPage(),  rel:'prev'}">←</a></li>
-                        <!-- /ko -->
-                        <!-- ko foreach: pageArray()-->
-                        <!-- ko if:$data == $parent.currentPage() -->
-                        <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
-                        <!-- /ko -->
-                        <!-- ko if:$data != $parent.currentPage() -->
-                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'athletes.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
-                        <!-- /ko -->
-                        <!-- /ko -->
-                        <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
-                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'athletes.html?page=' + nextPage(), rel:'next' }">→</a></li>
-                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'athletes.html?page=' + totalPages() }">⇥</a></li>
-                        <!-- /ko -->
-                    </ul>
-                </div>
-            </div>
-            <!-- /ko -->
 
-            <div class="row row-cols-4" data-bind="foreach: records">
-                <div class="card mb-3" style="max-width: 540px">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img data-bind="attr:{src: Photo}" class="img-fluid rounded-start" alt="..." />
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title" data-bind="text:Name">Card title</h5>
-                                <p class="card-text" data-bind="text: 'Sexo: ' + Sex" style="margin: 0"></p>
-                                <p class="card-text" data-bind="text: 'Melhor posição: ' + BestPosition"></p>
-                                <p class="card-text">
-                                    <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./athleteDetails.html?id=' + Id }">
-                                        <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="map" style="margin: auto"></div>
+
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -135,6 +76,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="./scripts/athletes.js"></script>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+        <script src="./scripts/countries.js"></script>
     </body>
 </html>
