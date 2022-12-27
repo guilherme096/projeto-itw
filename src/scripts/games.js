@@ -1,4 +1,4 @@
-﻿import {flagCodes} from './flagCodes.js';
+﻿import { flagCodes } from './flagCodes.js';
 // ViewModel KnockOut
 var vm = function () {
     console.log('ViewModel initiated...');
@@ -64,13 +64,15 @@ var vm = function () {
             self.years(ko.computed(function () {
                 var years = [];
                 for (var i = 0; i < self.records().length; i++) {
-                    //check if the element is already in the array
-                    if (years.indexOf(self.records()[i].Year) == -1){
-                        var year_s = {name: self.records()[i].Year.toString(), games: 
-                            // get all games for that year
-                            ko.utils.arrayFilter(self.records(), function (item) {
-                                return item.Year == self.records()[i].Year;
-                            })
+                    // check if already exists on object with the name of the year
+                    if (!years.filter(function (e) { return e.name == self.records()[i].Year; }).length > 0) {
+                        console.log("Year=", self.records()[i].Year);
+                        var year_s = {
+                            name: self.records()[i].Year.toString(), games:
+                                // get all games for that year
+                                ko.utils.arrayFilter(self.records(), function (item) {
+                                    return item.Year == self.records()[i].Year;
+                                })
                         };
                         // for each game in year_s add a property with the country code
                         for (var j = 0; j < year_s.games.length; j++) {
@@ -79,7 +81,6 @@ var vm = function () {
                         years.push(year_s);
                     }
                 }
-                console.log(years);
                 return years;
             }, self))
             self.currentPage(data.CurrentPage);

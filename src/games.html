@@ -56,7 +56,7 @@
         </div>
     </nav>
     <!-- Working Area -->
-    <div class="container">
+    <div class="container" style="margin-top: 80px;">
         <div class="border-bottom py-2 mb-2">
             <h2 data-bind="text:displayName"></h2>
         </div>
@@ -134,14 +134,14 @@
                                         <div class="col-12 col-md-6 col-lg-4">
                                             <div class="single-timeline-content d-flex wow fadeInLeft"
                                                 data-wow-delay="0.3s"
-                                                style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft;">
-                                                <div class="timeline-icon" style="background-color: transparent;"><img
+                                                style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft; align-items: center; padding: 15px;">
+                                                <div class="mx-2 d-flex" style="background-color: transparent; height: 65px; width: 65px; align-items: center;"><img
                                                         style="max-width: 100%;max-height: 100%;"
-                                                        data-bind="attr:{src: flagUrl}" crossorigin="anonymous" /></svg>
+                                                        data-bind="attr:{src: flagUrl}" crossorigin="anonymous" />
                                                 </div>
                                                 <div class="timeline-text">
-                                                    <h6 data-bind="text: Name"></h6>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                                    <h6 data-bind="text: Name + ' - ' + CountryName"></h6>
+                                                    <p data-bind="text: CityName"></p>
                                                 </div>
                                             </div>
                                         </div>

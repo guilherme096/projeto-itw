@@ -3,6 +3,7 @@ export const flagCodes = {
     "France": "FRA",
     "United States": "USA",
     "United Kingdom": "GBR",
+    "Great Britain": "GBR",
     "Sweden": "SWE",
     "Belgium": "BEL",
     "United States": "USA",
@@ -27,4 +28,8 @@ export const flagCodes = {
     "Japan": "JPN",
     "China": "CHN",
     "Finland": "FIN",
+    "Switzerland": "che",
+    "Germany": "DE",
+    "Yougoslavia": "YUG",
+    "Brazil": "BRA",
 };
