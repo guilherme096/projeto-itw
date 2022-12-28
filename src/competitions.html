@@ -127,7 +127,7 @@
                 <!-- /ko -->
                 <!-- ko if:$data != $parent.currentPage() -->
                 <li class="page-item"><a class="page-link"
-                        data-bind="attr: { href: 'competitions.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a>
+                        data-bind="attr: { href: 'competitions.html?page=' + $data + '&view=' + $parent.view(), title:'Goto Page ' + $data }, text:$data"></a>
                 </li>
                 <!-- /ko -->
                 <!-- /ko -->

@@ -42,7 +42,7 @@ var vm = function () {
             list.push(i + step);
         return list;
     };
-    self.view = ko.observable('card');
+    self.view = ko.observable(getUrlParameter('view') ? getUrlParameter('view') : 'card');
 
     // Function to toggle the view
     self.toggleTable = function() {

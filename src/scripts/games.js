@@ -44,7 +44,7 @@ var vm = function () {
             list.push(i + step);
         return list;
     };
-    self.view = ko.observable('timeline');
+    self.view = ko.observable(getUrlParameter('view') ? getUrlParameter('view') : 'timeline');
 
     // Function to toggle the view
     self.toggleTable = function () {
