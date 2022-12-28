@@ -129,19 +129,24 @@
                                         style="visibility: visible; animation-delay: 0.1s; animation-name: fadeInLeft;">
                                         <p data-bind="text: name"></p>
                                     </div>
+
                                     <div class="row">
                                         <!-- ko foreach: games -->
                                         <div class="col-12 col-md-6 col-lg-4">
                                             <div class="single-timeline-content d-flex wow fadeInLeft"
                                                 data-wow-delay="0.3s"
                                                 style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft; align-items: center; padding: 15px;">
-                                                <div class="mx-2 d-flex" style="background-color: transparent; height: 65px; width: 65px; align-items: center;"><img
-                                                        style="max-width: 100%;max-height: 100%;"
+                                                <div class="mx-2 d-flex"
+                                                    style="background-color: transparent; height: 65px; width: 65px; align-items: center;">
+                                                    <img style="max-width: 100%;max-height: 100%;"
                                                         data-bind="attr:{src: flagUrl}" crossorigin="anonymous" />
                                                 </div>
                                                 <div class="timeline-text">
-                                                    <h6 data-bind="text: Name + ' - ' + CountryName"></h6>
+                                                    <a data-bind="text: Name + ' - ' + CountryName"
+                                                        style="cursor: pointer; "></a>
                                                     <p data-bind="text: CityName"></p>
+                                                    <a
+                                                        data-bind="attr:{href: './gameDetails.html?id=' + Id}" style="font-size: small;">Details</a>
                                                 </div>
                                             </div>
                                         </div>

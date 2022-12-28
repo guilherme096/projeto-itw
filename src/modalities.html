@@ -98,28 +98,6 @@
                 </div>
             </div>
             <!-- /ko -->
-
-            <div class="row row-cols-4" data-bind="foreach: records">
-                <div class="card mb-3" style="max-width: 540px">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                            <img data-bind="attr:{src: Photo}" class="img-fluid rounded-start" alt="..." />
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title" data-bind="text:Name">Card title</h5>
-                                <p class="card-text" data-bind="text: 'Sexo: ' + Sex" style="margin: 0"></p>
-                                <p class="card-text" data-bind="text: 'Melhor posição: ' + BestPosition"></p>
-                                <p class="card-text">
-                                    <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./athleteDetails.html?id=' + Id }">
-                                        <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -147,6 +125,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="./scripts/athletes.js"></script>
+        <script src="./scripts/modalities.js"></script>
     </body>
 </html>
