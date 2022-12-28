@@ -55,15 +55,17 @@
             </div>
         </div>
     </nav>
-    <!-- Work Area-->  
-    <div class="jumbotron jumbotron-bg d-flex flex-column-reverse px-4" data-bind="style: { 'background-image': 'url(' + Photo() + ')' }" style="margin-top: 50px; height: 300px; background-size: cover; background-position: center;">
+    <!-- Work Area-->
+    <div class="jumbotron jumbotron-bg d-flex flex-column-reverse px-4"
+        data-bind="style: { 'background-image': 'url(' + Photo() + ')' }"
+        style="margin-top: 50px; height: 300px; background-size: cover; background-position: center;">
         <nav aria-label="breadcrumb text-white">
             <ol class="breadcrumb text-bg-primary bg-opacity-25">
                 <li class="breadcrumb-item active text-white fs-4" aria-current="page">Games</li>
                 <li class="breadcrumb-item active text-white fs-4" aria-current="page" data-bind="text: Name"></li>
             </ol>
         </nav>
-      </div>  
+    </div>
     <div class="container col-12" style="margin-bottom: 80px; margin-top: 20px;">
         <div class="row">
             <div class="col-md-3">
@@ -82,10 +84,67 @@
                 <div class="col-12 border-bottom">
                     <h2 data-bind="text: Name() + ' Statistics'"></h2>
                 </div>
-                <ul class="list-group list-group-flush col-md-6 mt-2">
-                    <li class="list-group-item d-flex" style="justify-content: space-between;"><div>Nº Atletas Participantes</div><div data-bind="text: AthletesSum()"></div></li>
-                    <li class="list-group-item d-flex" style="justify-content: space-between;"><div>Nº Países Participantes</div><div data-bind="text: countriesSum()"></div></li>
-                  </ul>
+                <div class="row mt-4">
+                    <ul class="list-group list-group-flush col-md-6">
+                        <li class="list-group-item d-flex" style="justify-content: space-between;">
+                            <div>Nº Atletas Participantes</div>
+                            <div data-bind="text: AthletesSum()"></div>
+                        </li>
+                        <li class="list-group-item d-flex" style="justify-content: space-between;">
+                            <div>Nº Países Participantes</div>
+                            <div data-bind="text: countriesSum()"></div>
+                        </li>
+                        <li class="list-group-item d-flex" style="justify-content: space-between;">
+                            <div>Nº Medalhas de Ouro</div>
+                            <div data-bind="text: GoldMedals()"></div>
+                        </li>
+                        <li class="list-group-item d-flex" style="justify-content: space-between;">
+                            <div>Nº Medalhas de Prata</div>
+                            <div data-bind="text: SilverMedals()"></div>
+                        </li>
+                        <li class="list-group-item d-flex" style="justify-content: space-between;">
+                            <div>Nº Medalhas de Bronze</div>
+                            <div data-bind="text: BronzeMedals()"></div>
+                        </li>
+                    </ul>
+                    <div class="col-md-6 mt-2" style="height: 64px;">
+                        <h5>Países mais medalhados</h5>
+                        <ul class="list-group list-group-flush col-md-12" data-bind="foreach: topCountries">
+                            <li class="list-group-item col-md-12">
+                                <div class="card mb-3 border-0" style="max-width: 540px;">
+                                    <div class="row g-0 col-12">
+                                        <div class="col-md-3">
+                                            <img class="img-fluid rounded-start" data-bind="attr: {src: flagUrl}"
+                                                crossorigin="anonymous" style="width: 80px;height: 64px">
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="row col-12" style="height: 100%;">
+                                                <h5 class="card-title col-6" data-bind="text: Country"></h5>
+                                                <div class="col-6 row p-0" style="height: 100%;">
+                                                    <div class="col-4">
+                                                        <img src="../icons/gold-medal.png" alt=""
+                                                            style="max-height: 24px; object-fit: contain;">
+                                                        <div data-bind="text:GoldMedals" class="col-12 text-center"></div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <img src="../icons/silver-medal.png" alt=""
+                                                            style="max-height: 24px; object-fit: contain;">
+                                                        <div data-bind="text:SilverMedals" class="col-12 text-center"></div>
+                                                    </div>
+                                                    <div class="col-4">
+                                                        <img src="../icons/bronze-medal.png" alt=""
+                                                            style="max-height: 24px; object-fit: contain;">
+                                                        <div data-bind="text:BronzeMedals" class="col-12 text-center"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="col-md-12">
@@ -194,7 +253,7 @@
                                     <td data-bind="text: Results"></td>
                                 </tr>
                             </tbody>
-    
+
                         </table>
                     </div>
                 </div>
@@ -236,7 +295,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
         integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="./scripts/gameDetails.js"></script>
+    <script src="./scripts/gameDetails.js" type="module"></script>
 </body>
 
 </html>
