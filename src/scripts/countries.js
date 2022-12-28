@@ -46,11 +46,9 @@ var vm = function () {
     //--- Page Events
     self.activate = function (id) {
         console.log('CALL: getGames...');
-        var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
+        console.log(self.totalRecords())
+        var composedUri = self.baseUri() + "?page=1&pagesize="+self.totalRecords();//+"&sort=CountryName&dir=asc";
         ajaxHelper(composedUri, 'GET').done(function (data) {
-            console.log(data);
-            hideLoading();
-            self.records(data.Records);
             self.currentPage(data.CurrentPage);
             self.hasNext(data.HasNext);
             self.hasPrevious(data.HasPrevious);
@@ -58,6 +56,13 @@ var vm = function () {
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalRecords);
             //self.SetFavourites();
+            var composedUri = self.baseUri() + "?page=1&pagesize="+self.totalRecords();//+"&sort=CountryName&dir=asc";
+            ajaxHelper(composedUri, 'GET').done(function (data) {
+                hideLoading();
+                self.records(data.Records);
+                console.log(data);
+                
+            });
         });
     };
 
@@ -120,18 +125,6 @@ var vm = function () {
         self.activate(pg);
     }
     console.log("VM initialized!");
-
-    var map = L.map('map').setView([40.6378, -8.6538], 13);
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-
-    var marker = L.marker([40.6378, -8.6538]).addTo(map);
-
-    // how to get the coordinates of the city Porto, Portugal
-    // https://www.latlong.net/place/porto-portugal-141.html
-    var marker = L.marker([41.1496, -8.6109]).addTo(map); // Porto, Portugal
 };
 
 $(document).ready(function () {
@@ -142,4 +135,71 @@ $(document).ready(function () {
 $(document).ajaxComplete(function (event, xhr, options) {
     $("#myModal").modal('hide');
 })
+
+$(document).ready(function () {
+    var map = L.map("map").setView([40.6378, -8.6538], 5);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 18,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    }).addTo(map);
+
+    var marker = L.marker([40.6378, -8.6538]).addTo(map); // aveiro, teste
+    function fetchJSON(url) {
+        return fetch(url).then(function (response) {
+            return response.json();
+        });
+    }
+
+    paises = {};
+    $.get("http://192.168.160.58/Olympics/api/Countries", function (data) {
+        totalPaises = data.TotalRecords;
+        $.get("http://192.168.160.58/Olympics/api/Countries?page=1&pagesize=" + totalPaises, function (data) {
+            data.Records.forEach((pais) => {
+                paises[pais.Name] = pais.Id;
+            });
+            var url = "countries.geojson";
+
+            // var geojsonMarkerOptions = {
+            //     radius: 6,
+            //     opacity: 0.5,
+            //     color: "red",
+            //     fillColor: "blue",
+            //     fillOpacity: 0.8,
+            // };
+
+            
+            // função com a mensagem de quando se clica num país
+            function forEachFeature(feature, layer) {
+
+                var popupContent = "<p>Country: " + feature.properties.ADMIN + "</p><p>See more: <a href='countryDetails.html?id=" + paises[feature.properties.ADMIN] + "'>Here</a></p>";
+                layer.bindPopup(popupContent);
+            }
+
+            var bbTeam = L.geoJSON(null, {
+                onEachFeature: forEachFeature,
+                // style: geojsonMarkerOptions,
+                filter: filtro,
+            });
+
+            $.getJSON(url, function (data) {
+                var properties = data.features.map(function (feature) {
+                    return feature.properties;
+                });
+
+                console.log("Propriedades: ", properties);
+
+                bbTeam.addData(data);
+            });
+
+            // o filtro verifica se o país está na lista de países da API
+            function filtro(feature) {
+                // console.log(paises)                
+                // console.log(Object.keys(paises).includes(feature.properties.ADMIN))
+                if (Object.keys(paises).includes(feature.properties.ADMIN)) return true;
+            }
+
+            bbTeam.addTo(map);
+        });
+    });
+});
 
