@@ -1,116 +1,233 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>ITW 2022/23 - Olympic Games editions List</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="./styles/myCSS.css" />
-        <link rel="stylesheet" href="./styles/theme.css" />
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="index.html" tabindex="Olympics"><img src="../images/Olympic_rings.svg" height="24" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="athletes.html"><i class="fa fa-user-o text-warning"></i> Athletes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i> Competitions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="countries.html"><i class="fa fa-flag-o text-danger"></i> Countries</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="games.html"><i class="fa fa-map-marker text-success"></i> Games</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Work Area-->
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>ITW 2022/23 - Olympic Games editions List</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+        integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles/myCSS.css" />
+    <link rel="stylesheet" href="./styles/theme.css" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
-            <div class="py-2 border-bottom mb-3">
-                <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
-            </div>
-            <!-- ko if:Name().length > 0 -->
-            <div class="row border-bottom mx-0 my-1">
-                <div class="col-2">Id</div>
-                <div class="col-10" data-bind="text: Id"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1">
-                <div class="col-2">Name</div>
-                <div class="col-10" data-bind="text: Name"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1">
-                <div class="col-2">Country Name</div>
-                <div class="col-10" data-bind="text: CountryName"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1">
-                <div class="col-2">Season</div>
-                <div class="col-10" data-bind="text: Season"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1">
-                <div class="col-2">Year</div>
-                <div class="col-10" data-bind="text: Year"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Logo() != '' && Logo() != null">
-                <div class="col-2">Logo</div>
-                <div class="small col-10">
-                    <img class="img-thumbnail" data-bind="attr:{src: Logo}" /><br /><i class="fa fa-link"></i><br />
-                    [<a class="link-dark text-decoration-none" data-bind="attr: { href: Logo }, text: Logo" target="_blank"></a>]
-                </div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Photo() != '' && Photo() != null">
-                <div class="col-2">Photo</div>
-                <div class="small col-10">
-                    <img class="img-thumbnail" data-bind="attr:{src: Photo}" /><br />
-                    <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
-                </div>
-            </div>
-            <!-- /ko -->
-            <a href="./games.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
-            <a data-bind="attr: { href:'./gameFull.html?id=' + Id() }" class="btn btn-default btn-sm small"><i class="fa fa-th"></i> Full Setails</a>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"><img src="../images/Olympic_rings.svg" height="30" /> Loading data...</h5>
-                    </div>
-                    <div class="modal-body text-center">
-                        <i class="fa fa-spin fa-3x fa-refresh"></i>
-                    </div>
-                </div>
+            <a class="navbar-brand" href="index.html" tabindex="Olympics"><img src="../images/Olympic_rings.svg"
+                    height="24" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="athletes.html"><i
+                                class="fa fa-user-o text-warning"></i> Athletes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i>
+                            Competitions</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="countries.html"><i
+                                class="fa fa-flag-o text-danger"></i> Countries</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="games.html"><i
+                                class="fa fa-map-marker text-success"></i> Games</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="modalities.html"><i
+                                class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <!-- End of Work Area -->
-        <nav class="navbar navbar-light bg-light fixed-bottom">
-            <div class="container small">
-                <div class="navbar-text">&copy; Introdução as Tecnologias Web - 2022/23</div>
-                <div class="navbar-text">Made with <i class="fa fa-heart-o text-danger"></i> for U by <a href="mailto:jsp@ua.pt" class="text-decoration-none text-muted">jsp@ua.pt</a>.</div>
-                <div class="navbar-nav">
-                    <div class="nav-item text-end"><a href="https://www.ua.pt" class="nav-link">Universidade de Aveiro</a></div>
-                </div>
-            </div>
+    </nav>
+    <!-- Work Area-->  
+    <div class="jumbotron jumbotron-bg d-flex flex-column-reverse px-4" data-bind="style: { 'background-image': 'url(' + Photo() + ')' }" style="margin-top: 50px; height: 300px; background-size: cover; background-position: center;">
+        <nav aria-label="breadcrumb text-white">
+            <ol class="breadcrumb text-bg-primary bg-opacity-25">
+                <li class="breadcrumb-item active text-white fs-4" aria-current="page">Games</li>
+                <li class="breadcrumb-item active text-white fs-4" aria-current="page" data-bind="text: Name"></li>
+            </ol>
         </nav>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="./scripts/gameDetails.js"></script>
-    </body>
+      </div>  
+    <div class="container col-12" style="margin-bottom: 80px; margin-top: 20px;">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <img class="card-img-top" data-bind="attr: { src: Logo }" alt="Logo">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3" data-bind="text: Name"></h4>
+                        <p class="card-text"><strong>Country:</strong> <span data-bind="text: CountryName"></span></p>
+                        <p class="card-text"><strong>City:</strong> <span data-bind="text: City"></span></p>
+                        <p class="card-text"><strong>Year:</strong> <span data-bind="text: Year"></span></p>
+                        <p class="card-text"><strong>Season:</strong> <span data-bind="text: Season"></span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="accordion py-4 px-2">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#athletes" aria-expanded="false" aria-controls="athletes">
+                            Athletes
+                        </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" id="athletes">
+                        <table class="table mx-auto mb-4 accordion-body" style="margin-left: 20px; margin-right: 20px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Photo</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Sex</th>
+                                    <th scope="col">Best Position</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: Athletes">
+                                <tr>
+                                    <td scope="row">
+                                        <!-- ko if: $data.Photo-->
+                                        <img class="img-thumbnail" data-bind="attr:{src: Photo}"
+                                            style="height: 50px; object-fit: contain;" />
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: $data.Photo-->
+                                        <i class="fa-regular fa-user"
+                                            style="height: 50px; width: 50px; object-fit: contain;"></i>
+                                        <!-- /ko -->
+                                        </th>
+                                    <td data-bind="text: Name"></td>
+                                    <td data-bind="text: Sex"></td>
+                                    <td data-bind="text: BestPosition"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#modalities" aria-expanded="false" aria-controls="modalities">
+                            Modalities
+                        </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" id="modalities">
+                        <table class="table mx-auto mb-4 accordion-body" style="margin-left: 20px; margin-right: 20px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Photo</th>
+                                    <th scope="col">Name</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: Modalities">
+                                <tr>
+                                    <td scope="row">
+                                        <!-- ko if: $data.Photo-->
+                                        <img class="img-thumbnail" data-bind="attr:{src: Photo}"
+                                            style="height: 50px; object-fit: contain;" />
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: $data.Photo-->
+                                        <i class="fa-regular fa-user"
+                                            style="height: 50px; width: 50px; object-fit: contain;"></i>
+                                        <!-- /ko -->
+                                        </th>
+                                    <td data-bind="text: Name"></td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#competitions" aria-expanded="false" aria-controls="competitions">
+                            Competitions
+                        </button>
+                    </h2>
+                    <div class="accordion-collapse collapse" id="competitions">
+                        <table class="table mx-auto mb-4 accordion-body" style="margin-left: 20px; margin-right: 20px;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Photo</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Modality</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach: Competitions">
+                                <tr>
+                                    <td scope="row">
+                                        <!-- ko if: $data.Photo-->
+                                        <img class="img-thumbnail" data-bind="attr:{src: Photo}"
+                                            style="height: 50px; object-fit: contain;" />
+                                        <!-- /ko -->
+                                        <!-- ko ifnot: $data.Photo-->
+                                        <i class="fa-regular fa-user"
+                                            style="height: 50px; width: 50px; object-fit: contain;"></i>
+                                        <!-- /ko -->
+                                        </th>
+                                    <td data-bind="text: Name"></td>
+                                    <td data-bind="text: Modality"></td>
+                                    <td data-bind="text: Results"></td>
+                                </tr>
+                            </tbody>
+    
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"><img src="../images/Olympic_rings.svg" height="30" />
+                        Loading data...</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fa fa-spin fa-3x fa-refresh"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of Work Area -->
+    <nav class="navbar navbar-light bg-light fixed-bottom">
+        <div class="container small">
+            <div class="navbar-text">&copy; Introdução as Tecnologias Web - 2022/23</div>
+            <div class="navbar-text">Made with <i class="fa fa-heart-o text-danger"></i> for U by <a
+                    href="mailto:jsp@ua.pt" class="text-decoration-none text-muted">jsp@ua.pt</a>.</div>
+            <div class="navbar-nav">
+                <div class="nav-item text-end"><a href="https://www.ua.pt" class="nav-link">Universidade de
+                        Aveiro</a></div>
+            </div>
+        </div>
+    </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js"
+        integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js"
+        integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js"
+        integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="./scripts/gameDetails.js"></script>
+</body>
+
 </html>

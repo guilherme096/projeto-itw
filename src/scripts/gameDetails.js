@@ -3,7 +3,7 @@ var vm = function () {
     console.log('ViewModel initiated...');
     //---Variáveis locais
     var self = this;
-    self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/Games/');
+    self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/Games/FullDetails?id=');
     self.displayName = 'Olympic Games edition Details';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
@@ -13,8 +13,13 @@ var vm = function () {
     self.Logo = ko.observable('');
     self.Name = ko.observable('');
     self.Photo = ko.observable('');
+    self.City = ko.observable('');
     self.Season = ko.observable('');
     self.Year = ko.observableArray('');
+    self.Athletes = ko.observableArray([]);
+    self.Modalities = ko.observableArray([]);
+    self.Competitions = ko.observableArray([]);
+    self.Medals = ko.observableArray([]);
     self.Url = ko.observable('');
 
     //--- Page Events
@@ -28,9 +33,14 @@ var vm = function () {
             self.CountryName(data.CountryName);
             self.Logo(data.Logo);
             self.Name(data.Name);
+            self.City(data.City);
             self.Photo(data.Photo);
             self.Season(data.Season);
             self.Year(data.Year);
+            self.Athletes(data.Athletes);
+            self.Modalities(data.Modalities);
+            self.Competitions(data.Competitions);
+            self.Medals(data.Medals);
         });
     };
 
