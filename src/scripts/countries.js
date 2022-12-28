@@ -141,6 +141,8 @@ $(document).ready(function () {
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
         maxZoom: 18,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        noWrap: true,
+        minZoom: 2
     }).addTo(map);
 
     var marker = L.marker([40.6378, -8.6538]).addTo(map); // aveiro, teste

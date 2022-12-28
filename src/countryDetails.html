@@ -14,10 +14,52 @@
         <link rel="stylesheet" href="./styles/theme.css" />
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
         <style>
-            #map {
-                height: 500px;
+            .table-hover tbody tr:hover td,
+            .table-hover tbody tr:hover th {
+                background-color: #df1a38;
+            }
+            a {
+                color: white;
+            }
+            a:hover {
+                color: #e1cbcf;
+            }
+            .card {
+                background-color: #ff304f;
+                color: white;
+                border-width: 2px;
+            }
+            .card:hover {
+                background-color: #df1a38;
+                color: white;
+                border-width: 2px;
+                transition: all 0.3s ease-in-out;
+            }
+            .accordion-button {
+                background-color: #ff304f;
+                color: white;
+                border-width: 2px;
+            }
+            .accordion-button:hover {
+                background-color: #df1a38;
+                transition: all 0.3s ease-in-out;
+            }
+            .accordion-button:focus {
+                outline: none;
+                box-shadow: none;
+            }
+            .accordion-button:not(.collapsed) {
+                background-color: #df1a38;
+                color: white;
+                border-width: 2px;
+            }
+
+            .accordion-button:not(.collapsed):focus {
+                outline: none;
+                box-shadow: none;
             }
         </style>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -48,6 +90,170 @@
             </div>
         </nav>
 
+        <!-- Working Area -->
+        <div class="container" style="background-color: #ff304f; margin-top: 65px; border-radius: 15px; padding: 10px 0px 10px 0px; color: white">
+            <!-- ko if:Name().length > 0 -->
+            <div class="py-2 border-bottom mb-3">
+                <h2 data-bind="text:Name() +' [' + Id() + ']'" style="font-weight: bold; text-align: center"></h2>
+            </div>
+            <div class="row">
+                <div class="col-6" style="padding-left: 50px">
+                    <h2 style="text-align: center">Main Information</h2>
+                    <table class="table table-hover table-striped-columns table-bordered" style="background-color: #f22e4b">
+                        <tr>
+                            <th style="color: white">Id</th>
+                            <td class="col-2" data-bind="text: Id" style="color: white"></td>
+                        </tr>
+                        <tr>
+                            <th class="col-1" style="color: white">Name</th>
+                            <td class="col-2" data-bind="text: Name" style="color: white"></td>
+                        </tr>
+                        <tr>
+                            <th class="col-1" style="color: white">IOC</th>
+                            <td class="col-2" data-bind="text: IOC" style="color: white"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-6" style="text-align: center">
+                    <img class="img-thumbnail" data-bind="attr:{src: Flag}" style="height: 250px" /><br />
+                    <i class="fa fa-link"></i> [<a class="text-decoration-none" data-bind="attr: { href: Flag }" target="_blank">Link para a imagem</a>]
+                </div>
+            </div>
+
+            <!-- accordion -->
+            <div class="accordion" id="accordionExample" style="width: 80%; margin-left: 10%; margin-top: 30px">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Events</button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row" data-bind="foreach: Events">
+                                <div class="col-sm-4" style="margin-top: 20px">
+                                    <div class="card" style="width: 18rem">
+                                        <img data-bind="attr:{src: Photo}" class="card-img-top" />
+                                        <div class="card-body">
+                                            <h5 class="card-title" data-bind="text: Name"></h5>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">ID</li>
+                                                <li class="list-group-item" data-bind="text: Id"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">Modality</li>
+                                                <li class="list-group-item" data-bind="text: Modality"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">Results</li>
+                                                <li class="list-group-item" data-bind="text: Results"></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Participant</button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row" data-bind="foreach: Participant">
+                                <div class="col-sm-4" style="margin-top: 20px">
+                                    <div class="card" style="width: 18rem">
+                                        <img data-bind="attr:{src: Photo}" class="card-img-top" />
+                                        <div class="card-body">
+                                            <h5 class="card-title" data-bind="text: Name"></h5>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">ID</li>
+                                                <li class="list-group-item" data-bind="text: Id"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">Year</li>
+                                                <li class="list-group-item" data-bind="text: Year"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">CityName</li>
+                                                <li class="list-group-item" data-bind="text: CityName"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">CountryName</li>
+                                                <li class="list-group-item" data-bind="text: CountryName"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">Logo</li>
+                                                <li class="list-group-item"><img data-bind="attr:{src: Logo}" style="width: 50px" /></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal" data-bind="visible: Lat != '' && Lat != null">
+                                                <li class="list-group-item" style="width: 100px">Lat</li>
+                                                <li class="list-group-item" data-bind="text: Lat"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal" data-bind="visible: Lon != '' && Lon != null">
+                                                <li class="list-group-item" style="width: 100px">Lon</li>
+                                                <li class="list-group-item" data-bind="text: Lon"></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item" data-bind="visible: Organizer != '' && Organizer != null">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Organizer</button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <div class="row" data-bind="foreach: Organizer">
+                                <div class="col-sm-4" style="margin-top: 20px">
+                                    <div class="card" style="width: 18rem">
+                                        <img data-bind="attr:{src: Photo}" class="card-img-top" />
+                                        <div class="card-body">
+                                            <h5 class="card-title" data-bind="text: Name"></h5>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">ID</li>
+                                                <li class="list-group-item" data-bind="text: Id"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">Year</li>
+                                                <li class="list-group-item" data-bind="text: Year"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">CityName</li>
+                                                <li class="list-group-item" data-bind="text: CityName"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">CountryName</li>
+                                                <li class="list-group-item" data-bind="text: CountryName"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal">
+                                                <li class="list-group-item" style="width: 100px">Logo</li>
+                                                <li class="list-group-item"><img data-bind="attr:{src: Logo}" style="width: 50px" /></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal" data-bind="visible: Lat != '' && Lat != null">
+                                                <li class="list-group-item" style="width: 100px">Lat</li>
+                                                <li class="list-group-item" data-bind="text: Lat"></li>
+                                            </ul>
+                                            <ul class="card-text list-group list-group-horizontal" data-bind="visible: Lon != '' && Lon != null">
+                                                <li class="list-group-item" style="width: 100px">Lon</li>
+                                                <li class="list-group-item" data-bind="text: Lon"></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /accordion -->
+
+            <!-- /ko -->
+        </div>
+
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -75,6 +281,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-        <script src="./scripts/countries.js"></script>
+        <script src="./scripts/countryDetails.js"></script>
     </body>
 </html>
