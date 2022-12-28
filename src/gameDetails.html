@@ -78,9 +78,18 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-9">
+                <div class="col-12 border-bottom">
+                    <h2 data-bind="text: Name() + ' Statistics'"></h2>
+                </div>
+                <ul class="list-group list-group-flush col-md-6 mt-2">
+                    <li class="list-group-item d-flex" style="justify-content: space-between;"><div>Nº Atletas Participantes</div><div data-bind="text: AthletesSum()"></div></li>
+                    <li class="list-group-item d-flex" style="justify-content: space-between;"><div>Nº Países Participantes</div><div data-bind="text: countriesSum()"></div></li>
+                  </ul>
+            </div>
         </div>
         <div class="col-md-12">
-            <div class="accordion py-4 px-2">
+            <div class="accordion py-4">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"

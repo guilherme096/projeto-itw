@@ -4,6 +4,7 @@ var vm = function () {
     //---Variáveis locais
     var self = this;
     self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/Games/FullDetails?id=');
+    self.statsUri = ko.observable('http://192.168.160.58/Olympics/api/Statistics/Games_Countries');
     self.displayName = 'Olympic Games edition Details';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
@@ -21,14 +22,24 @@ var vm = function () {
     self.Competitions = ko.observableArray([]);
     self.Medals = ko.observableArray([]);
     self.Url = ko.observable('');
+    self.countriesSum = ko.observable();
+    self.AthletesSum = ko.observable();
 
     //--- Page Events
-    self.activate = function (id) {
+    self.activate = async function (id) {
         console.log('CALL: getGame...');
         var composedUri = self.baseUri() + id;
-        ajaxHelper(composedUri, 'GET').done(function (data) {
+        await ajaxHelper(composedUri, 'GET').done(function (data) {
+            ajaxHelper(self.statsUri(), 'GET').done(function (data) {
+                var counter = 0;
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].Name == self.Name()) {
+                        counter = data[i].Counter;
+                    }
+                }
+                self.countriesSum(counter);
+            });
             console.log(data);
-            hideLoading();
             self.Id(data.Id);
             self.CountryName(data.CountryName);
             self.Logo(data.Logo);
@@ -41,7 +52,9 @@ var vm = function () {
             self.Modalities(data.Modalities);
             self.Competitions(data.Competitions);
             self.Medals(data.Medals);
+            self.AthletesSum(self.Athletes().length);
         });
+        hideLoading();
     };
 
     //--- Internal functions
