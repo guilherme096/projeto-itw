@@ -33,7 +33,7 @@ var vm = function () {
             self.Events(data.Events);
             self.Participant(data.Participant);
             self.Organizer(data.Organizer);
-            
+            console.log("Organizer", self.Organizer().lengh)
         });
     };
 
