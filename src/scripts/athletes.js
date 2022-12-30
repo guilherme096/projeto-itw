@@ -140,10 +140,12 @@ var vm = function () {
     };
 
     self.pesquisa = function() {
+        console.log("pesquisar...");
         self.pesquisado($("#searchbar").val().toLowerCase());
         if (self.pesquisado().length > 0) {
             window.location.href = "athletes.html?search=" + self.pesquisado();
         }
+        console.log(self.pesquisado())
     }
 
     //--- start ....
@@ -151,7 +153,7 @@ var vm = function () {
     var pg = getUrlParameter('page');
     self.pesquisado = ko.observable(getUrlParameter('search'));
     console.log(pg);
-    if (self.pesquisado() == undefined) {
+    if (self.pesquisado() == undefined || self.pesquisado() == "" || self.pesquisado() == null) {
         if (pg == undefined)
             self.activate(1);
         else {
@@ -163,7 +165,6 @@ var vm = function () {
         self.displayName = 'Found results for ' + self.pesquisado();
     }
     console.log("VM initialized!");
-
     
 };
 

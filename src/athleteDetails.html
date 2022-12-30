@@ -12,6 +12,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./styles/myCSS.css" />
         <link rel="stylesheet" href="./styles/theme.css" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+        <style>
+            col:first-child {
+                background: rgba(0, 0, 0, 0.05);
+            }
+            body {
+                color: white;
+            }
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -42,61 +51,74 @@
             </div>
         </nav>
         <!-- Working Area -->
-        <div class="container">
-            <div class="py-2 border-bottom mb-3">
-                <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
+        <div class="container" style="margin-top: 80px">
+            <div class="row border-bottom mb-3">
+                <h2 data-bind="text:displayName" style="color: #ecb306"></h2>
             </div>
-            <!-- ko if:Name().length > 0 -->
-            <div class="row border-bottom mx-0 my-1">
-                <div class="col-2">Id</div>
-                <div class="col-10" data-bind="text: Id"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1">
-                <div class="col-2">Name</div>
-                <div class="col-10" data-bind="text: Name"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Photo() != '' && Photo() != null">
-                <div class="col-2">Photo</div>
-                <div class="small col-10">
-                    <img class="img-thumbnail" data-bind="attr:{src: Photo}" /><br />
-                    <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
+            <div class="container" style="background-color: #ffc107; border-radius: 15px">
+                <div class="row py-2">
+                    <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
                 </div>
+                <!-- ko if:Name().length > 0 -->
+                <div class="row">
+                    <div class="col-8">
+                        <table class="table table-hover table-bordered" style="background-color: #ecb306">
+                            <col />
+                            <col />
+                            <tr>
+                                <th style="color: white">Id</th>
+                                <td class="col-2" data-bind="text: Id" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: Name() != '' && Name() != null">
+                                <th class="col-1" style="color: white">Name</th>
+                                <td class="col-2" data-bind="text: Name" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: Sex() != '' && Sex() != null">
+                                <th class="col-1" style="color: white">Sex</th>
+                                <td class="col-2" data-bind="text: Sex" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: Height() != '' && Height() != null">
+                                <th class="col-1" style="color: white">Height</th>
+                                <td class="col-2" data-bind="text: Height" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: Weight() != '' && Weight() != null">
+                                <th class="col-1" style="color: white">Weight</th>
+                                <td class="col-2" data-bind="text: Weight" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: BornDate() != '' && BornDate() != null">
+                                <th class="col-1" style="color: white">BornDate</th>
+                                <td class="col-2" data-bind="text: BornDate" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: BornPlace() != '' && BornPlace() != null">
+                                <th class="col-1" style="color: white">BornPlace</th>
+                                <td class="col-2" data-bind="text: BornPlace" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: DiedDate() != '' && DiedDate() != null">
+                                <th class="col-1" style="color: white">DiedDate</th>
+                                <td class="col-2" data-bind="text: DiedDate" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: DiedPlace() != '' && DiedPlace() != null">
+                                <th class="col-1" style="color: white">DiedPlace</th>
+                                <td class="col-2" data-bind="text: DiedPlace" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: OlympediaLink() != '' && OlympediaLink() != null">
+                                <th class="col-1" style="color: white">Olympedia Link</th>
+                                <td class="col-2" data-bind="text: OlympediaLink" style="color: white"></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-4" data-bind="visible: Photo() != '' && Photo() != null">
+                        <img class="img-thumbnail" data-bind="attr:{src: Photo}" /><br />
+                        <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
+                    </div>
+                </div>
+
+                <!-- /ko -->
             </div>
-            <div class="row border-bottom mx-0 my-1">
-                <div class="col-2">Sex</div>
-                <div class="col-10" data-bind="text: Sex"></div>
+            <div class="container" style="text-align: center; margin-top: 20px">
+                <a href="./athletes.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+                <a data-bind="attr: { href:'./athleteFull.html?id=' + Id() }" class="btn btn-default btn-sm small"><i class="fa fa-th"></i> Full Setails</a>
             </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Height() != '' && Height() != null && Height() != 'NA'">
-                <div class="col-2">Height</div>
-                <div class="col-10" data-bind="text: Height"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Weight() != '' && Weight() != null && Weight() != 'NA'">
-                <div class="col-2">Weight</div>
-                <div class="col-10" data-bind="text: Weight"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: BornDate() != '' && BornDate() != null">
-                <div class="col-2">BornDate</div>
-                <div class="col-10" data-bind="text: BornDate"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: BornPlace() != '' && BornPlace() != null">
-                <div class="col-2">BornPlace</div>
-                <div class="col-10" data-bind="text: BornPlace"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: DiedDate() != '' && DiedDate() != null">
-                <div class="col-2">DiedDate</div>
-                <div class="col-10" data-bind="text: DiedDate"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: DiedPlace() != '' && DiedPlace() != null">
-                <div class="col-2">DiedPlace</div>
-                <div class="col-10" data-bind="text: DiedPlace"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: OlympediaLink() != '' && OlympediaLink() != null">
-                <div class="col-2">Olympedia Link</div>
-                <div class="col-10" data-bind="text: OlympediaLink"><i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]</div>
-            </div>
-            <!-- /ko -->
-            <a href="./athletes.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
-            <a data-bind="attr: { href:'./athleteFull.html?id=' + Id() }" class="btn btn-default btn-sm small"><i class="fa fa-th"></i> Full Setails</a>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
