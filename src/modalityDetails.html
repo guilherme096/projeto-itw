@@ -24,7 +24,30 @@
                 color: white;
             }
             a:hover {
-                color: #a17901;
+                color: #003c97;
+            }
+            .accordion-button {
+                background-color: #0d6efd;
+                color: white;
+                border-width: 2px;
+            }
+            .accordion-button:hover {
+                background-color: #003c97;
+                transition: all 0.3s ease-in-out;
+            }
+            .accordion-button:focus {
+                outline: none;
+                box-shadow: none;
+            }
+            .accordion-button:not(.collapsed) {
+                background-color: #003c97;
+                color: white;
+                border-width: 2px;
+            }
+
+            .accordion-button:not(.collapsed):focus {
+                outline: none;
+                box-shadow: none;
             }
         </style>
     </head>
@@ -38,7 +61,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="athletes.html"><i class="fa fa-user-o text-warning"></i> Athletes</a>
+                            <a class="nav-link" aria-current="page" href="athletes.html"><i class="fa fa-user-o text-warning"></i> Athletes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i> Competitions</a>
@@ -50,7 +73,7 @@
                             <a class="nav-link" aria-current="page" href="games.html"><i class="fa fa-map-marker text-success"></i> Games</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
+                            <a class="nav-link active" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
                         </li>
                     </ul>
                 </div>
@@ -59,16 +82,16 @@
         <!-- Working Area -->
         <div class="container" style="margin-top: 80px">
             <div class="row border-bottom mb-3">
-                <h2 data-bind="text:displayName" style="color: #ecb306"></h2>
+                <h2 data-bind="text:displayName" style="color: #003c97"></h2>
             </div>
-            <div class="container" style="background-color: #ffc107; border-radius: 15px">
+            <div class="container" style="background-color: #0d6efd; border-radius: 15px; padding: 10px 10px 10px 30px">
                 <div class="row py-2">
                     <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
                 </div>
                 <!-- ko if:Name().length > 0 -->
                 <div class="row">
-                    <div class="col-4">
-                        <table class="table table-hover table-bordered" style="background-color: #ecb306">
+                    <div class="col-6">
+                        <table class="table table-hover table-bordered" style="background-color: #003c97">
                             <col />
                             <col />
                             <tr>
@@ -81,17 +104,53 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="col-8" data-bind="visible: Photo() != '' && Photo() != null">
+                    <div class="col-6" data-bind="visible: Photo() != '' && Photo() != null">
                         <img class="img-thumbnail" data-bind="attr:{src: Photo}" width="300px" /><br />
                         <i class="fa fa-link"></i> [<a class="text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
                     </div>
                 </div>
 
                 <!-- /ko -->
+                <!-- accordion -->
+                <div class="accordion" id="accordionExample" style="width: 80%; margin-left: 10%; margin-top: 30px">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Modalities</button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="row" data-bind="foreach: Modalities">
+                                    <div class="col-sm-4" style="margin-top: 20px">
+                                        <div class="card" style="width: 18rem">
+                                            <img data-bind="attr:{src: Photo}" class="card-img-top" />
+                                            <div class="card-body">
+                                                <h5 class="card-title" data-bind="text: Name"></h5>
+                                                <ul class="card-text list-group list-group-horizontal">
+                                                    <li class="list-group-item" style="width: 100px">ID</li>
+                                                    <li class="list-group-item" data-bind="text: Id"></li>
+                                                </ul>
+                                                <ul class="card-text list-group list-group-horizontal">
+                                                    <li class="list-group-item" style="width: 100px">Modality</li>
+                                                    <li class="list-group-item" data-bind="text: Modality"></li>
+                                                </ul>
+                                                <ul class="card-text list-group list-group-horizontal">
+                                                    <li class="list-group-item" style="width: 100px">Results</li>
+                                                    <li class="list-group-item" data-bind="text: Results"></li>
+                                                </ul>
+                                                <a class="btn btn-warning" data-bind="attr:{href: 'competitionDetails.html?id=' + Id}" style="margin-top: 10px">More details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /accordion -->
             </div>
+
             <div class="container" style="text-align: center; margin-top: 20px">
-                <a href="./modalities.html" class="btn btn-warning btn-sm small"><i class="fa fa-list"></i> Back to List</a>
-                <a data-bind="attr: { href:'./modalityFull.html?id=' + Id() }" class="btn btn-warning btn-sm small"><i class="fa fa-th"></i> Full Setails</a>
+                <a href="./modalities.html" class="btn btn-primary btn-sm small"><i class="fa fa-list"></i> Back to List</a>
             </div>
         </div>
         <!-- Modal -->
