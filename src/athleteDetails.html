@@ -20,6 +20,12 @@
             body {
                 color: white;
             }
+            a {
+                color: white;
+            }
+            a:hover {
+                color: #a17901;
+            }
         </style>
     </head>
     <body>
@@ -77,11 +83,11 @@
                                 <th class="col-1" style="color: white">Sex</th>
                                 <td class="col-2" data-bind="text: Sex" style="color: white"></td>
                             </tr>
-                            <tr data-bind="visible: Height() != '' && Height() != null">
+                            <tr data-bind="visible: Height() != '' && Height() != null && Height() != 'NA'">
                                 <th class="col-1" style="color: white">Height</th>
                                 <td class="col-2" data-bind="text: Height" style="color: white"></td>
                             </tr>
-                            <tr data-bind="visible: Weight() != '' && Weight() != null">
+                            <tr data-bind="visible: Weight() != '' && Weight() != null && Weight() != 'NA' ">
                                 <th class="col-1" style="color: white">Weight</th>
                                 <td class="col-2" data-bind="text: Weight" style="color: white"></td>
                             </tr>
@@ -109,15 +115,15 @@
                     </div>
                     <div class="col-4" data-bind="visible: Photo() != '' && Photo() != null">
                         <img class="img-thumbnail" data-bind="attr:{src: Photo}" /><br />
-                        <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
+                        <i class="fa fa-link"></i> [<a class="text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
                     </div>
                 </div>
 
                 <!-- /ko -->
             </div>
             <div class="container" style="text-align: center; margin-top: 20px">
-                <a href="./athletes.html" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to List</a>
-                <a data-bind="attr: { href:'./athleteFull.html?id=' + Id() }" class="btn btn-default btn-sm small"><i class="fa fa-th"></i> Full Setails</a>
+                <a href="./athletes.html" class="btn btn-warning btn-sm small"><i class="fa fa-list"></i> Back to List</a>
+                <a data-bind="attr: { href:'./athleteFull.html?id=' + Id() }" class="btn btn-warning btn-sm small"><i class="fa fa-th"></i> Full Setails</a>
             </div>
         </div>
         <!-- Modal -->

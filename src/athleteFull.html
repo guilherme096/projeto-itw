@@ -12,6 +12,45 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./styles/myCSS.css" />
         <link rel="stylesheet" href="./styles/theme.css" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+        <style>
+            col:first-child {
+                background: rgba(0, 0, 0, 0.05);
+            }
+            body {
+                color: white;
+            }
+            a {
+                color: white;
+            }
+            a:hover {
+                color: #a17901;
+            }
+            .accordion-button {
+                background-color: #ffc107;
+                color: white;
+                border-width: 2px;
+            }
+            .accordion-button:hover {
+                background-color: #ecb306;
+                transition: all 0.3s ease-in-out;
+            }
+            .accordion-button:focus {
+                outline: none;
+                box-shadow: none;
+            }
+            .accordion-button:not(.collapsed) {
+                background-color: #ecb306;
+                color: white;
+                border-width: 2px;
+            }
+
+            .accordion-button:not(.collapsed):focus {
+                outline: none;
+                box-shadow: none;
+            }
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -42,155 +81,215 @@
             </div>
         </nav>
         <!-- Working Area -->
-        <div class="container">
-            <div class="py-2 border-bottom mb-3">
-                <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
+        <div class="container" style="margin-top: 80px">
+            <div class="row border-bottom mb-3">
+                <h2 data-bind="text:displayName" style="color: #ecb306"></h2>
             </div>
-            <!-- ko if:Name().length > 0 -->
-            <div class="row border-bottom mx-0 my-1">
-                <div class="col-2">Id</div>
-                <div class="col-10" data-bind="text: Id"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1">
-                <div class="col-2">Name</div>
-                <div class="col-10" data-bind="text: Name"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Photo() != '' && Photo() != null">
-                <div class="col-2">Photo</div>
-                <div class="small col-10">
-                    <img class="img-thumbnail" data-bind="attr:{src: Photo}" /><br />
-                    <i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
+            <div class="container" style="background-color: #ffc107; border-radius: 15px; padding-bottom: 20px">
+                <div class="row py-2">
+                    <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
                 </div>
-            </div>
-            <div class="row border-bottom mx-0 my-1">
-                <div class="col-2">Sex</div>
-                <div class="col-10" data-bind="text: Sex"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Height() != '' && Height() != null && Height() != 'NA'">
-                <div class="col-2">Height</div>
-                <div class="col-10" data-bind="text: Height"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Weight() != '' && Weight() != null && Weight() != 'NA'">
-                <div class="col-2">Weight</div>
-                <div class="col-10" data-bind="text: Weight"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: BornDate() != '' && BornDate() != null">
-                <div class="col-2">BornDate</div>
-                <div class="col-10" data-bind="text: BornDate"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: BornPlace() != '' && BornPlace() != null">
-                <div class="col-2">BornPlace</div>
-                <div class="col-10" data-bind="text: BornPlace"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: DiedDate() != '' && DiedDate() != null">
-                <div class="col-2">DiedDate</div>
-                <div class="col-10" data-bind="text: DiedDate"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: DiedPlace() != '' && DiedPlace() != null">
-                <div class="col-2">DiedPlace</div>
-                <div class="col-10" data-bind="text: DiedPlace"></div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: OlympediaLink() != '' && OlympediaLink() != null">
-                <div class="col-2">Olympedia Link</div>
-                <div class="col-10" data-bind="text: OlympediaLink"><i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]</div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Games() != '' && Games() != null">
-                <div class="col-2">Games</div>
-                <div class="col-10" data-bind="foreach: Games">
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Id</div>
-                        <div class="col-10" data-bind="text: Id"></div>
+                <!-- ko if:Name().length > 0 -->
+                <div class="row">
+                    <div class="col-8">
+                        <table class="table table-hover table-bordered" style="background-color: #ecb306">
+                            <col />
+                            <col />
+                            <tr>
+                                <th style="color: white">Id</th>
+                                <td class="col-2" data-bind="text: Id" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: Name() != '' && Name() != null">
+                                <th class="col-1" style="color: white">Name</th>
+                                <td class="col-2" data-bind="text: Name" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: Sex() != '' && Sex() != null">
+                                <th class="col-1" style="color: white">Sex</th>
+                                <td class="col-2" data-bind="text: Sex" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: Height() != '' && Height() != null && Height() != 'NA'">
+                                <th class="col-1" style="color: white">Height</th>
+                                <td class="col-2" data-bind="text: Height" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: Weight() != '' && Weight() != null && Weight() != 'NA'">
+                                <th class="col-1" style="color: white">Weight</th>
+                                <td class="col-2" data-bind="text: Weight" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: BornDate() != '' && BornDate() != null">
+                                <th class="col-1" style="color: white">BornDate</th>
+                                <td class="col-2" data-bind="text: BornDate" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: BornPlace() != '' && BornPlace() != null">
+                                <th class="col-1" style="color: white">BornPlace</th>
+                                <td class="col-2" data-bind="text: BornPlace" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: DiedDate() != '' && DiedDate() != null">
+                                <th class="col-1" style="color: white">DiedDate</th>
+                                <td class="col-2" data-bind="text: DiedDate" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: DiedPlace() != '' && DiedPlace() != null">
+                                <th class="col-1" style="color: white">DiedPlace</th>
+                                <td class="col-2" data-bind="text: DiedPlace" style="color: white"></td>
+                            </tr>
+                            <tr data-bind="visible: OlympediaLink() != '' && OlympediaLink() != null">
+                                <th class="col-1" style="color: white">Olympedia Link</th>
+                                <td class="col-2" data-bind="text: OlympediaLink" style="color: white"></td>
+                            </tr>
+                        </table>
+                        <div class="accordion" id="accordionExample" style="width: 80%; margin-left: 10%; margin-top: 30px">
+                            <div class="accordion-item" data-bind="visible: Games() != '' && Games() != null">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Games</button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="row" data-bind="foreach: Games">
+                                            <div class="col-sm-4" style="margin-top: 20px">
+                                                <div class="card" style="width: 18rem">
+                                                    <img data-bind="attr:{src: Photo}" class="card-img-top" />
+                                                    <div class="card-body">
+                                                        <h5 class="card-title" data-bind="text: Name"></h5>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">ID</li>
+                                                            <li class="list-group-item" data-bind="text: Id"></li>
+                                                        </ul>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">Year</li>
+                                                            <li class="list-group-item" data-bind="text: Year"></li>
+                                                        </ul>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">CityName</li>
+                                                            <li class="list-group-item" data-bind="text: CityName"></li>
+                                                        </ul>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">CountryName</li>
+                                                            <li class="list-group-item" data-bind="text: CountryName"></li>
+                                                        </ul>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">CityName</li>
+                                                            <li class="list-group-item" data-bind="text: CityName"></li>
+                                                        </ul>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">Logo</li>
+                                                            <li class="list-group-item"><img data-bind="attr: {src: Logo}" style="width: 100px" /></li>
+                                                        </ul>
+                                                        <a class="btn btn-warning" data-bind="attr:{href: 'gameDetails.html?id=' + Id}" style="margin-top: 10px">More details</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item" data-bind="visible: Modalities() != '' && Modalities() != null">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Modalities</button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="row" data-bind="foreach: Modalities">
+                                            <div class="col-sm-4" style="margin-top: 20px">
+                                                <div class="card" style="width: 18rem">
+                                                    <img data-bind="attr:{src: Photo}" class="card-img-top" />
+                                                    <div class="card-body">
+                                                        <h5 class="card-title" data-bind="text: Name"></h5>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">ID</li>
+                                                            <li class="list-group-item" data-bind="text: Id"></li>
+                                                        </ul>
+                                                        <a class="btn btn-warning" data-bind="attr:{href: 'gameDetails.html?id=' + Id}" style="margin-top: 10px">More details</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ko if : Competitions().length != 0 && Competitions().length != null-->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingThree">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Competitions</button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="row" data-bind="foreach: Competitions">
+                                            <div class="col-sm-4" style="margin-top: 20px">
+                                                <div class="card" style="width: 18rem">
+                                                    <img data-bind="attr:{src: Photo}" class="card-img-top" />
+                                                    <div class="card-body">
+                                                        <h5 class="card-title" data-bind="text: Name"></h5>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">ID</li>
+                                                            <li class="list-group-item" data-bind="text: Id"></li>
+                                                        </ul>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">Modality</li>
+                                                            <li class="list-group-item" data-bind="text: Modality"></li>
+                                                        </ul>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">Results</li>
+                                                            <li class="list-group-item" data-bind="text: Results"></li>
+                                                        </ul>
+
+                                                        <a class="btn btn-warning" data-bind="attr:{href: 'gameDetails.html?id=' + Id}" style="margin-top: 10px">More details</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if : Medals().length != 0 && Medals().length != null-->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingFour">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Medals</button>
+                                </h2>
+                                <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="row" data-bind="foreach: Medals">
+                                            <div class="col-sm-4" style="margin-top: 20px">
+                                                <div class="card" style="width: 18rem">
+                                                    <div class="card-body">
+                                                        <!-- ko if: MedalName == "Gold" -->
+                                                        <h5 class="card-title">Gold 🥇</h5>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: MedalName == "Silver" -->
+                                                        <h5 class="card-title">Silver 🥈</h5>
+                                                        <!-- /ko -->
+                                                        <!-- ko if: MedalName == "Bronze" -->
+                                                        <h5 class="card-title">Bronze 🥉</h5>
+                                                        <!-- /ko -->
+
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">Medal Id</li>
+                                                            <li class="list-group-item" data-bind="text: MedalId"></li>
+                                                        </ul>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">Counter</li>
+                                                            <li class="list-group-item" data-bind="text: Counter"></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
                     </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Name</div>
-                        <div class="col-10" data-bind="text: Name"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Year</div>
-                        <div class="col-10" data-bind="text: Year"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">CityName</div>
-                        <div class="col-10" data-bind="text: CityName"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">CountryName</div>
-                        <div class="col-10" data-bind="text: CountryName"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Logo</div>
-                        <div class="col-10" data-bind="text: Logo"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Photo</div>
-                        <img class="img-thumbnail" data-bind="attr:{src: Photo}" style="width: 200px" /><br />
-                        <p><i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]</p>
+                    <div class="col-4" data-bind="visible: Photo() != '' && Photo() != null">
+                        <img class="img-thumbnail" data-bind="attr:{src: Photo}" /><br />
+                        <i class="fa fa-link"></i> [<a class="text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]
                     </div>
                 </div>
+                <!-- /ko -->
             </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Modalities() != '' && Modalities() != null">
-                <div class="col-2">Modalities</div>
-                <div class="col-10" data-bind="foreach: Modalities">
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Id</div>
-                        <div class="col-10" data-bind="text: Id"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Name</div>
-                        <div class="col-10" data-bind="text: Name"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Photo</div>
-                        <img class="img-thumbnail" data-bind="attr:{src: Photo}" style="width: 200px" /><br />
-                        <p><i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]</p>
-                    </div>
-                </div>
+            <div class="container" style="text-align: center; margin-top: 20px">
+                <a data-bind="attr: { href:'./athleteDetails.html?id=' + Id() }" class="btn btn-warning btn-sm small"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back to Athlete</a>
+                <a href="./athletes.html" class="btn btn-warning btn-sm small"><i class="fa fa-list"></i> Back to List</a>
             </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Competitions() != '' && Competitions() != null">
-                <div class="col-2">Competitions</div>
-                <div class="col-10" data-bind="foreach: Competitions">
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Id</div>
-                        <div class="col-10" data-bind="text: Id"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Name</div>
-                        <div class="col-10" data-bind="text: Name"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1" data-bind="visible: Photo != '' && Photo != null">
-                        <div class="col-2">Photo</div>
-                        <img class="img-thumbnail" data-bind="attr:{src: Photo}" style="width: 200px" /><br />
-                        <p><i class="fa fa-link"></i> [<a class="link-dark text-decoration-none" data-bind="attr: { href: Photo }, text : Photo" target="_blank"></a>]</p>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Modality</div>
-                        <div class="col-10" data-bind="text: Modality"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Results</div>
-                        <div class="col-10" data-bind="text: Results"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="row border-bottom mx-0 my-1" data-bind="visible: Medals() != '' && Medals() != null">
-                <div class="col-2">Medals</div>
-                <div class="col-10" data-bind="foreach: Medals">
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">MedalId</div>
-                        <div class="col-10" data-bind="text: MedalId"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">MedalName</div>
-                        <div class="col-10" data-bind="text: MedalName"></div>
-                    </div>
-                    <div class="row border-bottom mx-0 my-1">
-                        <div class="col-2">Counter</div>
-                        <div class="col-10" data-bind="text: Counter"></div>
-                    </div>
-                </div>
-            </div>
-            <!-- /ko -->
-            <a data-bind="attr: { href:'./athleteDetails.html?id=' + Id() }" class="btn btn-default btn-sm small"><i class="fa fa-list"></i> Back to Athlete</a>
             <!--<a data-bind="attr: { href:'./athleteFull.html?id=' + Id() }" class="btn btn-default btn-sm small"><i class="fa fa-th"></i> Full Setails</a>-->
         </div>
         <!-- Modal -->
