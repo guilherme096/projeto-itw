@@ -5,7 +5,7 @@ var vm = function () {
     var self = this;
     self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/competitions');
 
-    self.displayName = 'Olympic Athletes List';
+    self.displayName = 'Olympic Competitions List';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     self.records = ko.observableArray([]);
