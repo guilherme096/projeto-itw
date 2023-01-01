@@ -64,6 +64,11 @@
                             <a class="nav-link active" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="favorites.html" class="nav-link active"><i class="fa fa-heart-o text-danger"></i> Favorites</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -127,6 +132,9 @@
                                 <p class="card-text" data-bind="text: 'ID: ' + Id"></p>
                                 <p class="card-text">
                                     <a class="btn btn-primary btn-xs" data-bind="attr: { href:'./modalityDetails.html?id=' + Id }" style="color: white"> <i class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
+                                    <button data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-default btn-xs btn-favourite">
+                                        <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Favorite"></i>
+                                    </button>
                                 </p>
                             </div>
                         </div>
@@ -138,6 +146,9 @@
                                 <p class="card-text" data-bind="text: 'ID: ' + Id"></p>
                                 <p class="card-text">
                                     <a class="btn btn-primary btn-xs" data-bind="attr: { href:'./modalityDetails.html?id=' + Id }" style="color: white"> <i class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
+                                    <button data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-default btn-xs btn-favourite">
+                                        <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Favorite"></i>
+                                    </button>
                                 </p>
                             </div>
                         </div>

@@ -24,7 +24,7 @@
                 color: white;
             }
             a:hover {
-                color: #a17901;
+                color: #003c97;
             }
         </style>
     </head>
@@ -59,16 +59,16 @@
         <!-- Working Area -->
         <div class="container" style="margin-top: 80px">
             <div class="row border-bottom mb-3">
-                <h2 data-bind="text:displayName" style="color: #ecb306"></h2>
+                <h2 data-bind="text:displayName" style="color: #003c97"></h2>
             </div>
-            <div class="container" style="background-color: #ffc107; border-radius: 15px">
+            <div class="container" style="background-color: #0d6efd; border-radius: 15px">
                 <div class="row py-2">
                     <h2 data-bind="text:Name() +' [' + Id() + ']'"></h2>
                 </div>
                 <!-- ko if:Name().length > 0 -->
                 <div class="row">
                     <div class="col-4">
-                        <table class="table table-hover table-bordered" style="background-color: #ecb306">
+                        <table class="table table-hover table-bordered" style="background-color: #003c97">
                             <col />
                             <col />
                             <tr>
@@ -90,8 +90,7 @@
                 <!-- /ko -->
             </div>
             <div class="container" style="text-align: center; margin-top: 20px">
-                <a href="./modalities.html" class="btn btn-warning btn-sm small"><i class="fa fa-list"></i> Back to List</a>
-                <a data-bind="attr: { href:'./modalityFull.html?id=' + Id() }" class="btn btn-warning btn-sm small"><i class="fa fa-th"></i> Full Setails</a>
+                <a href="./modalities.html" class="btn btn-primary btn-sm small"><i class="fa fa-list"></i> Back to List</a>
             </div>
         </div>
         <!-- Modal -->
