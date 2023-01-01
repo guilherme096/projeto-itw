@@ -5,10 +5,11 @@ var vm = function () {
     var self = this;
     self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/competitions');
 
-    self.displayName = 'Olympic Athletes List';
+    self.displayName = 'Olympic Competitions List';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     self.records = ko.observableArray([]);
+    self.favourites = ko.observableArray([]);
     self.currentPage = ko.observable(1);
     self.pagesize = ko.observable(20);
     self.totalRecords = ko.observable(50);
@@ -42,6 +43,29 @@ var vm = function () {
             list.push(i + step);
         return list;
     };
+
+    self.toggleFavourite = function (id) {
+        if (self.favourites.indexOf(id) == -1) {
+            self.favourites.push(id);
+        }
+        else {
+            self.favourites.remove(id);
+        }
+        localStorage.setItem("fav2", JSON.stringify(self.favourites()));
+    };
+    self.SetFavourites = function () {
+        let storage;
+        try {
+            storage = JSON.parse(localStorage.getItem("fav2"));
+        }
+        catch (e) {
+            ;
+        }
+        if (Array.isArray(storage)) {
+            self.favourites(storage);
+        }
+    }
+
     self.view = ko.observable(getUrlParameter('view') ? getUrlParameter('view') : 'card');
 
     // Function to toggle the view
@@ -54,7 +78,7 @@ var vm = function () {
 
     //--- Page Events
     self.activate = function (id) {
-        console.log('CALL: getGames...');
+        console.log('CALL: getCompetitions...');
         var composedUri = self.baseUri() + "?page=" + id + "&pageSize=" + self.pagesize();
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
@@ -66,7 +90,37 @@ var vm = function () {
             self.pagesize(data.PageSize)
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalRecords);
-            //self.SetFavourites();
+            self.SetFavourites();
+        });
+    };
+
+    self.activate2 = function (search, page) {
+        console.log('CALL: searchCompetitions...');
+        var composedUri = "http://192.168.160.58/Olympics/api/Competitions/SearchByName?q=" + search;
+        ajaxHelper(composedUri, 'GET').done(function (data) {
+            console.log("searchCompetitions", data);
+            hideLoading();
+            self.records(data.slice(0 + 21 * (page - 1), 21 * page));
+            self.totalRecords(data.length);
+            self.currentPage(page);
+            if (page == 1) {
+                self.hasPrevious(false)
+            } else {
+                self.hasPrevious(true)
+            }
+            if (self.records() - 21 > 0) {
+                self.hasNext(true)
+            } else {
+                self.hasNext(false)
+            }
+            if (Math.floor(self.totalRecords() / 21) == 0) {
+                self.totalPages(1);
+            } else {
+                self.totalPages(Math.ceil(self.totalRecords() / 21));
+            }
+            self.SetFavourites();
+            console.log(self.records()[0].Id)
+            
         });
     };
 
@@ -119,14 +173,30 @@ var vm = function () {
         }
     };
 
+    self.pesquisa = function() {
+        console.log("pesquisar...");
+        self.pesquisado($("#searchbar").val().toLowerCase());
+        if (self.pesquisado().length > 0) {
+            window.location.href = "competitions.html?search=" + self.pesquisado();
+        }
+        console.log(self.pesquisado())
+    }
+
     //--- start ....
     showLoading();
     var pg = getUrlParameter('page');
+    self.pesquisado = ko.observable(getUrlParameter('search'));
     console.log(pg);
-    if (pg == undefined)
-        self.activate(1);
-    else {
-        self.activate(pg);
+    if (self.pesquisado() == undefined || self.pesquisado() == "" || self.pesquisado() == null) {
+        if (pg == undefined)
+            self.activate(1);
+        else {
+            self.activate(pg);
+        }
+    }else {
+        if (pg == undefined) self.activate2(self.pesquisado(), 1);
+        else self.activate2(self.pesquisado(), pg)
+        self.displayName = 'Found results for ' + self.pesquisado();
     }
     console.log("VM initialized!");
 

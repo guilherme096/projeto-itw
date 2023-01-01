@@ -107,6 +107,7 @@ var vm = function () {
             } else {
                 self.totalPages(Math.ceil(self.totalRecords() / 21));
             }
+            self.SetFavourites();
             console.log(self.records()[0].Id)
             
         });

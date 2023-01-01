@@ -5,7 +5,7 @@ var vm = function () {
     //---Variáveis locais
     var self = this;
     self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/Competitions/');
-    self.displayName = 'Olympic Games edition Details';
+    self.displayName = 'Olympic Competition Details';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     //--- Data Record
@@ -18,18 +18,19 @@ var vm = function () {
 
     //--- Page Events
     self.activate = function (id) {
-        console.log('CALL: getGame...');
+        console.log('CALL: getCompetition...');
         var composedUri = self.baseUri() + id;
         ajaxHelper(composedUri, 'GET').done(function (data) {
             console.log(data);
-            self.Id = data.Id;
-            self.Name = data.Name;
-            self.Photo = data.Photo;
-            self.Modality = data.Modality;
-            self.ModalityId = data.ModalityId;
-            self.Participant = data.Participant;
+            hideLoading();
+            self.Id(data.Id);
+            self.Name(data.Name);
+            self.Photo(data.Photo);
+            self.Modality ( data.Modality);
+            self.ModalityId ( data.ModalityId);
+            self.Participant (data.Participant);
         })
-        hideLoading();
+        
     };
 
     //--- Internal functions

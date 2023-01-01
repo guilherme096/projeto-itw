@@ -115,6 +115,58 @@ var vm = function () {
         });
     };
 
+    self.activate2 = function (search, page) {
+        console.log('CALL: searchCompetitions...');
+        var composedUri = "http://192.168.160.58/Olympics/api/Games/SearchByName?q=" + search;
+        ajaxHelper(composedUri, 'GET').done(function (data) {
+            console.log("searchCompetitions", data);
+            hideLoading();
+            self.records(data.slice(0 + 21 * (page - 1), 21 * page));
+            self.years(ko.computed(function () {
+                var years = [];
+                for (var i = 0; i < self.records().length; i++) {
+                    // check if already exists on object with the name of the year
+                    if (!years.filter(function (e) { return e.name == self.records()[i].Year; }).length > 0) {
+                        console.log("Year=", self.records()[i].Year);
+                        var year_s = {
+                            name: self.records()[i].Year.toString(), games:
+                                // get all games for that year
+                                ko.utils.arrayFilter(self.records(), function (item) {
+                                    return item.Year == self.records()[i].Year;
+                                })
+                        };
+                        // for each game in year_s add a property with the country code
+                        for (var j = 0; j < year_s.games.length; j++) {
+                            year_s.games[j].flagUrl = 'https://countryflagsapi.com/png/' + flagCodes[year_s.games[j].CountryName];
+                        }
+                        years.push(year_s);
+                    }
+                }
+                return years;
+            }, self))
+            self.totalRecords(data.length);
+            self.currentPage(page);
+            if (page == 1) {
+                self.hasPrevious(false)
+            } else {
+                self.hasPrevious(true)
+            }
+            if (self.records() - 21 > 0) {
+                self.hasNext(true)
+            } else {
+                self.hasNext(false)
+            }
+            if (Math.floor(self.totalRecords() / 21) == 0) {
+                self.totalPages(1);
+            } else {
+                self.totalPages(Math.ceil(self.totalRecords() / 21));
+            }
+            self.SetFavourites();
+            console.log(self.records()[0].Id)
+            
+        });
+    };
+
     //--- Internal functions
     function ajaxHelper(uri, method, data) {
         self.error(''); // Clear error message
@@ -164,14 +216,30 @@ var vm = function () {
         }
     };
 
+    self.pesquisa = function() {
+        console.log("pesquisar...");
+        self.pesquisado($("#searchbar").val().toLowerCase());
+        if (self.pesquisado().length > 0) {
+            window.location.href = "games.html?search=" + self.pesquisado();
+        }
+        console.log(self.pesquisado())
+    }
+
     //--- start ....
     showLoading();
     var pg = getUrlParameter('page');
+    self.pesquisado = ko.observable(getUrlParameter('search'));
     console.log(pg);
-    if (pg == undefined)
-        self.activate(1);
-    else {
-        self.activate(pg);
+    if (self.pesquisado() == undefined || self.pesquisado() == "" || self.pesquisado() == null) {
+        if (pg == undefined)
+            self.activate(1);
+        else {
+            self.activate(pg);
+        }
+    }else {
+        if (pg == undefined) self.activate2(self.pesquisado(), 1);
+        else self.activate2(self.pesquisado(), pg)
+        self.displayName = 'Found results for ' + self.pesquisado();
     }
     console.log("VM initialized!");
 
