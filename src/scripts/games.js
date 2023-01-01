@@ -57,7 +57,7 @@ var vm = function () {
     self.SetFavourites = function () {
         let storage;
         try {
-            storage = JSON.parse(localStorage.getItem("fav"));
+            storage = JSON.parse(localStorage.getItem("fav4"));
         }
         catch (e) {
             ;
