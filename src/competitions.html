@@ -12,6 +12,12 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./styles/myCSS.css" />
         <link rel="stylesheet" href="./styles/theme.css" />
+        <style>
+            .btn-group > .btn-group:not(:first-child),
+            .btn-group > :not(.btn-check:first-child) + .btn {
+                margin-left: 0px;
+            }
+        </style>
     </head>
 
     <body>
@@ -55,8 +61,8 @@
                     <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
                 </p>
                 <div class="btn-group col-1 ms-auto" role="group" aria-label="View options" style="display: flex; align-items: center">
-                    <button type="button" style="background-color: black; color: white" class="btn btn-sm" data-bind="click: toggleCard, css: { 'active': view() === 'card' }"><i class="fa-solid fa-table"></i></button>
-                    <button type="button" style="background-color: black; color: white" class="btn btn-sm" data-bind="click: toggleTable, css: { 'active': view() === 'table' }"><i class="fa-solid fa-list"></i></button>
+                    <button onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'" type="button" style="background-color: black; color: white" class="btn btn-sm" data-bind="click: toggleCard, css: { 'active': view() === 'card' }"><i class="fa-solid fa-table"></i></button>
+                    <button onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'" type="button" style="background-color: black; color: white; border: 0" class="btn btn-sm" data-bind="click: toggleTable, css: { 'active': view() === 'table' }"><i class="fa-solid fa-list"></i></button>
                 </div>
             </div>
 
@@ -68,6 +74,7 @@
                 <div class="card-body">
                     <h5 class="card-title" data-bind="text:Name"></h5>
                     <p class="card-text" data-bind="text:Modality"></p>
+                    <a style="float: right; background-color: black; color: white" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'" class="btn btn-xs" data-bind="attr: { href:'./competitionDetails.html?id=' + Id }" style="color: white"> <i class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
                 </div>
             </div>
         </div>

@@ -27,13 +27,13 @@
                             <a class="nav-link" aria-current="page" href="athletes.html"><i class="fa fa-user-o text-warning"></i> Athletes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i> Competitions</a>
+                            <a class="nav-link active" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i> Competitions</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="countries.html"><i class="fa fa-flag-o text-danger"></i> Countries</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="games.html"><i class="fa fa-map-marker text-success"></i> Games</a>
+                            <a class="nav-link" aria-current="page" href="games.html"><i class="fa fa-map-marker text-success"></i> Games</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
@@ -45,8 +45,8 @@
         <!-- Work Area-->
         <div class="jumbotron jumbotron-bg d-flex flex-column-reverse px-4" data-bind="style: { 'background-image': 'url(' + Photo() + ')' }" style="margin-top: 50px; height: 300px; background-size: cover; background-position: center">
             <nav aria-label="breadcrumb text-white">
-                <ol class="breadcrumb text-bg-primary bg-opacity-25">
-                    <li class="breadcrumb-item active text-white fs-4" aria-current="page">Games</li>
+                <ol class="breadcrumb text-bg" style="background-color: rgba(128, 128, 128, 0.4)">
+                    <li class="breadcrumb-item active text-white fs-4" aria-current="page">Competitions</li>
                     <li class="breadcrumb-item active text-white fs-4" aria-current="page" data-bind="text: Name"></li>
                 </ol>
             </nav>
@@ -55,170 +55,61 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="card">
-                        <img class="card-img-top" data-bind="attr: { src: Logo }" alt="Logo" />
+                        <img class="card-img-top" data-bind="attr: { src: Photo }" alt="Photo" />
                         <div class="card-body">
                             <h4 class="card-title mb-3" data-bind="text: Name"></h4>
-                            <p class="card-text"><strong>Country:</strong> <span data-bind="text: CountryName"></span></p>
-                            <p class="card-text"><strong>City:</strong> <span data-bind="text: City"></span></p>
-                            <p class="card-text"><strong>Year:</strong> <span data-bind="text: Year"></span></p>
-                            <p class="card-text"><strong>Season:</strong> <span data-bind="text: Season"></span></p>
+                            <p class="card-text"><strong>Id:</strong> <span data-bind="text: Id"></span></p>
+                            <p class="card-text"><strong>Modality Id:</strong> <span data-bind="text: ModalityId"></span></p>
+                            <p class="card-text"><strong>Modality:</strong> <span data-bind="text: Modality"></span></p>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-9">
-                    <div class="col-12 border-bottom">
-                        <h2 data-bind="text: Name() + ' Statistics'"></h2>
-                    </div>
-                    <div class="row mt-4">
-                        <ul class="list-group list-group-flush col-md-6">
-                            <li class="list-group-item d-flex" style="justify-content: space-between">
-                                <div>No. of Participating Athletes</div>
-                                <div data-bind="text: AthletesSum()"></div>
-                            </li>
-                            <li class="list-group-item d-flex" style="justify-content: space-between">
-                                <div>No. of Participating Countries</div>
-                                <div data-bind="text: countriesSum()"></div>
-                            </li>
-                            <li class="list-group-item d-flex" style="justify-content: space-between">
-                                <div>No. of Gold Medals</div>
-                                <div data-bind="text: GoldMedals()"></div>
-                            </li>
-                            <li class="list-group-item d-flex" style="justify-content: space-between">
-                                <div>No. of Silver Medals</div>
-                                <div data-bind="text: SilverMedals()"></div>
-                            </li>
-                            <li class="list-group-item d-flex" style="justify-content: space-between">
-                                <div>No. of Bronze Medals</div>
-                                <div data-bind="text: BronzeMedals()"></div>
-                            </li>
-                        </ul>
-                        <div class="col-md-6 mt-2" style="height: 64px">
-                            <h5>Most awarded countries</h5>
-                            <ul class="list-group list-group-flush col-md-12" data-bind="foreach: topCountries">
-                                <li class="list-group-item col-md-12">
-                                    <div class="card mb-3 border-0" style="max-width: 540px">
-                                        <div class="row g-0 col-12">
-                                            <div class="col-md-3">
-                                                <img class="img-fluid rounded-start" data-bind="attr: {src: flagUrl}" crossorigin="anonymous" style="width: 80px; height: 64px" />
-                                            </div>
-                                            <div class="col-md-9">
-                                                <div class="row col-12" style="height: 100%">
-                                                    <h5 class="card-title col-6" data-bind="text: Country"></h5>
-                                                    <div class="col-6 row p-0" style="height: 100%">
-                                                        <div class="col-4">
-                                                            <img src="../icons/gold-medal.png" alt="" style="max-height: 24px; object-fit: contain" />
-                                                            <div data-bind="text:GoldMedals" class="col-12 text-center"></div>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <img src="../icons/silver-medal.png" alt="" style="max-height: 24px; object-fit: contain" />
-                                                            <div data-bind="text:SilverMedals" class="col-12 text-center"></div>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <img src="../icons/bronze-medal.png" alt="" style="max-height: 24px; object-fit: contain" />
-                                                            <div data-bind="text:BronzeMedals" class="col-12 text-center"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="accordion py-4">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#athletes" aria-expanded="false" aria-controls="athletes">Athletes</button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="athletes">
-                            <table class="table mx-auto mb-4 accordion-body" style="margin-left: 20px; margin-right: 20px">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Photo</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Sex</th>
-                                        <th scope="col">Best Position</th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach: Athletes">
-                                    <tr>
-                                        <th scope="row">
-                                            <!-- ko if: $data.Photo-->
-                                            <img class="img-thumbnail" data-bind="attr:{src: Photo}" style="height: 50px; object-fit: contain" />
+                    <div class="accordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="true" aria-controls="collapse1">Participant</button>
+                            </h2>
+                            <div class="accordion-collapse collapse show" id="collapse1">
+                                <table class="table mx-auto mb-4 accordion-body" style="margin-left: 20px; margin-right: 20px">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Photo</th>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Year</th>
+                                            <th scope="col">City Name</th>
+                                            <th scope="col">Country Name</th>
+                                            <th scope="col">Logo</th>
+                                            <th scope="col">Lat</th>
+                                            <th scope="col">Lon</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="foreach: Participant">
+                                        <tr>
+                                            <th scope="row">
+                                                <!-- ko if: $data.Photo-->
+                                                <img class="img-thumbnail" data-bind="attr:{src: Photo}" style="height: 50px; object-fit: contain" />
+                                                <!-- /ko -->
+                                                <!-- ko ifnot: $data.Photo-->
+                                                <i class="fa-regular fa-user" style="height: 50px; width: 50px; object-fit: contain"></i>
+                                                <!-- /ko -->
+                                            </th>
+                                            <td data-bind="text: Id"></td>
+                                            <td data-bind="text: Name"></td>
+                                            <td data-bind="text: Year"></td>
+                                            <td data-bind="text: CityName"></td>
+                                            <td data-bind="text: CountryName"></td>
+                                            <!-- ko if: $data.Logo-->
+                                            <img class="img-thumbnail" data-bind="attr:{src: Logo}" style="height: 50px; object-fit: contain" />
                                             <!-- /ko -->
-                                            <!-- ko ifnot: $data.Photo-->
-                                            <i class="fa-regular fa-user" style="height: 50px; width: 50px; object-fit: contain"></i>
-                                            <!-- /ko -->
-                                        </th>
-                                        <td data-bind="text: Name"></td>
-                                        <td data-bind="text: Sex"></td>
-                                        <td data-bind="text: BestPosition"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#modalities" aria-expanded="false" aria-controls="modalities">Modalities</button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="modalities">
-                            <table class="table mx-auto mb-4 accordion-body" style="margin-left: 20px; margin-right: 20px">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Photo</th>
-                                        <th scope="col">Name</th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach: Modalities">
-                                    <tr>
-                                        <th scope="row">
-                                            <!-- ko if: $data.Photo-->
-                                            <img class="img-thumbnail" data-bind="attr:{src: Photo}" style="height: 50px; object-fit: contain" />
-                                            <!-- /ko -->
-                                            <!-- ko ifnot: $data.Photo-->
-                                            <i class="fa-regular fa-user" style="height: 50px; width: 50px; object-fit: contain"></i>
-                                            <!-- /ko -->
-                                        </th>
-                                        <td data-bind="text: Name"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#competitions" aria-expanded="false" aria-controls="competitions">Competitions</button>
-                        </h2>
-                        <div class="accordion-collapse collapse" id="competitions">
-                            <table class="table mx-auto mb-4 accordion-body" style="margin-left: 20px; margin-right: 20px">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Photo</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Modality</th>
-                                    </tr>
-                                </thead>
-                                <tbody data-bind="foreach: Competitions">
-                                    <tr>
-                                        <th scope="row">
-                                            <!-- ko if: $data.Photo-->
-                                            <img class="img-thumbnail" data-bind="attr:{src: Photo}" style="height: 50px; object-fit: contain" />
-                                            <!-- /ko -->
-                                            <!-- ko ifnot: $data.Photo-->
-                                            <i class="fa-regular fa-user" style="height: 50px; width: 50px; object-fit: contain"></i>
-                                            <!-- /ko -->
-                                        </th>
-                                        <td data-bind="text: Name"></td>
-                                        <td data-bind="text: Modality"></td>
-                                        <td data-bind="text: Results"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
+                                            <td data-bind="text: Lat"></td>
+                                            <td data-bind="text: Lon"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -250,6 +141,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="./scripts/gameDetails.js" type="module"></script>
+        <script src="./scripts/competitionDetails.js" type="module"></script>
     </body>
 </html>
