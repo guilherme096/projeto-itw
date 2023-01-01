@@ -134,7 +134,6 @@ $(document).ready(function () {
         sleep(50);
     }
 
-
     hideLoading();
 })
 
@@ -228,6 +227,7 @@ for (const i of fav4) {
     });
     sleep(50);
 }
+
 let fav5 = JSON.parse(localStorage.fav5 || '[]');
 
 console.log(fav5);
@@ -255,4 +255,6 @@ for (const i of fav5) {
         }
     });
     sleep(50);
+    
+    
 }
