@@ -110,8 +110,7 @@
                                         </div>
 
                                         <div class="row">
-                                            <!-- ko foreach: games -->
-                                            <div class="col-12 col-md-6 col-lg-4">
+                                            <div class="col-12 col-md-6 col-lg-4" data-bind="foreach: games">
                                                 <div class="single-timeline-content d-flex wow fadeInLeft" data-wow-delay="0.3s" style="visibility: visible; animation-delay: 0.3s; animation-name: fadeInLeft; align-items: center; padding: 15px">
                                                     <div class="mx-2 d-flex" style="background-color: transparent; height: 65px; width: 65px; align-items: center">
                                                         <img style="max-width: 100%; max-height: 100%" data-bind="attr:{src: flagUrl}" crossorigin="anonymous" />
@@ -121,9 +120,11 @@
                                                         <p data-bind="text: CityName"></p>
                                                         <a data-bind="attr:{href: './gameDetails.html?id=' + Id}" style="font-size: small">Details</a>
                                                     </div>
+                                                    <!-- <button data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-default btn-xs btn-favourite">
+                                                        <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Favorite"></i>
+                                                    </button> -->
                                                 </div>
                                             </div>
-                                            <!-- /ko -->
                                         </div>
                                     </div>
                                 </div>
