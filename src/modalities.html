@@ -8,63 +8,77 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
-            integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-            integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
-            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./styles/myCSS.css" />
         <link rel="stylesheet" href="./styles/theme.css" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+        <style>
+            .cards {
+                margin-right: 10px;
+                width: 24%;
+                height: fit-content;
+                border: 3px solid #0d6efd;
+            }
+            .card-img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+                margin-left: -12px;
+            }
+            .active > .page-link,
+            .page-link.active {
+                background-color: #0d6efd;
+                border-color: #0d6efd;
+            }
+            .page-link:hover {
+                color: #003c97;
+            }
+            .page-link {
+                color: #0d6efd;
+            }
+        </style>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="index.html" tabindex="Olympics"><img src="../images/Olympic_rings.svg"
-                        height="24" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                    aria-label="Toggle navigation">
+                <a class="navbar-brand" href="index.html" tabindex="Olympics"><img src="../images/Olympic_rings.svg" height="24" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="athletes.html"><i
-                                    class="fa fa-user-o text-warning"></i> Athletes</a>
+                            <a class="nav-link" aria-current="page" href="athletes.html"><i class="fa fa-user-o text-warning"></i> Athletes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i>
-                                Competitions</a>
+                            <a class="nav-link" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i> Competitions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="countries.html"><i
-                                    class="fa fa-flag-o text-danger"></i> Countries</a>
+                            <a class="nav-link" aria-current="page" href="countries.html"><i class="fa fa-flag-o text-danger"></i> Countries</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="games.html"><i
-                                    class="fa fa-map-marker text-success"></i> Games</a>
+                            <a class="nav-link" aria-current="page" href="games.html"><i class="fa fa-map-marker text-success"></i> Games</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="modalities.html"><i
-                                    class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
+                            <a class="nav-link active" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
         <!-- Working Area -->
-        <div class="container" style="margin-top: 80px;">
+        <div class="container" style="margin-top: 80px">
             <div class="row">
-                <div class="col-6 border-bottom py-2 mb-2">
+                <div class="col-8 border-bottom py-2 mb-2">
                     <h2 data-bind="text:displayName"></h2>
                 </div>
-                <div class="col-6 border-bottom py-2 mb-2">
+                <div class="col-4 border-bottom py-2 mb-2">
                     <div class="float-end input-group">
-                        <div class="form-outline">
-                            <input type="search" id="form1" class="form-control" />
+                        <div class="form-outline" style="width: 90%">
+                            <input type="search" id="searchbar" class="form-control" placeholder="Search..." />
                         </div>
-                        <button type="button" class="btn btn-primary" style="height: 40px">
+                        <button type="button" class="btn btn-primary" data-bind="click:pesquisa" style="width: 10%; height: 40px; background-color: #0d6efd; border-width: 0px">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -79,25 +93,58 @@
                 <div class="col-8 my-0 pt-3">
                     <ul class="pagination float-end">
                         <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
-                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'athletes.html?page=' + '1',  rel:'prev'}">⇤</a></li>
-                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'athletes.html?page=' + previousPage(),  rel:'prev'}">←</a></li>
+                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'modalities.html?page=' + '1',  rel:'prev'}">⇤</a></li>
+                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'modalities.html?page=' + previousPage(),  rel:'prev'}">←</a></li>
                         <!-- /ko -->
                         <!-- ko foreach: pageArray()-->
                         <!-- ko if:$data == $parent.currentPage() -->
                         <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
                         <!-- /ko -->
                         <!-- ko if:$data != $parent.currentPage() -->
-                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'athletes.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
+                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'modalities.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
                         <!-- /ko -->
                         <!-- /ko -->
                         <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
-                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'athletes.html?page=' + nextPage(), rel:'next' }">→</a></li>
-                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'athletes.html?page=' + totalPages() }">⇥</a></li>
+                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'modalities.html?page=' + nextPage(), rel:'next' }">→</a></li>
+                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'modalities.html?page=' + totalPages() }">⇥</a></li>
                         <!-- /ko -->
                     </ul>
                 </div>
             </div>
             <!-- /ko -->
+        </div>
+        <div class="container">
+            <div class="row row-cols-4" data-bind="foreach: records">
+                <div class="card mb-3 cards" style="max-width: 540px">
+                    <div class="row g-0">
+                        <!-- ko if: Photo -->
+                        <div class="col-md-4">
+                            <img data-bind="attr:{src: Photo}" class="img-fluid rounded-start card-img" alt="..." />
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #0d6efd"></h5>
+                                <p class="card-text" data-bind="text: 'ID: ' + Id"></p>
+                                <p class="card-text">
+                                    <a class="btn btn-primary btn-xs" data-bind="attr: { href:'./modalityDetails.html?id=' + Id }" style="color: white"> <i class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <!-- ko ifnot: Photo -->
+                        <div class="col-md-12">
+                            <div class="card-body">
+                                <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #0d6efd"></h5>
+                                <p class="card-text" data-bind="text: 'ID: ' + Id"></p>
+                                <p class="card-text">
+                                    <a class="btn btn-primary btn-xs" data-bind="attr: { href:'./modalityDetails.html?id=' + Id }" style="color: white"> <i class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

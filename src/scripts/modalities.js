@@ -5,7 +5,7 @@ var vm = function () {
     var self = this;
     self.baseUri = ko.observable('http://192.168.160.58/Olympics/api/modalities');
 
-    self.displayName = 'Olympic Athletes List';
+    self.displayName = 'Olympic Modalities List';
     self.error = ko.observable('');
     self.passingMessage = ko.observable('');
     self.records = ko.observableArray([]);
@@ -61,6 +61,35 @@ var vm = function () {
         });
     };
 
+    self.activate2 = function (search, page) {
+        console.log('CALL: searchModalities...');
+        var composedUri = "http://192.168.160.58/Olympics/api/Modalities/SearchByName?q=" + search;
+        ajaxHelper(composedUri, 'GET').done(function (data) {
+            console.log("searchModalities", data);
+            hideLoading();
+            self.records(data.slice(0 + 21 * (page - 1), 21 * page));
+            self.totalRecords(data.length);
+            self.currentPage(page);
+            if (page == 1) {
+                self.hasPrevious(false)
+            } else {
+                self.hasPrevious(true)
+            }
+            if (self.records() - 21 > 0) {
+                self.hasNext(true)
+            } else {
+                self.hasNext(false)
+            }
+            if (Math.floor(self.totalRecords() / 21) == 0) {
+                self.totalPages(1);
+            } else {
+                self.totalPages(Math.ceil(self.totalRecords() / 21));
+            }
+            console.log(self.records()[0].Id)
+            
+        });
+    };
+
     //--- Internal functions
     function ajaxHelper(uri, method, data) {
         self.error(''); // Clear error message
@@ -110,14 +139,30 @@ var vm = function () {
         }
     };
 
+    self.pesquisa = function() {
+        console.log("pesquisar...");
+        self.pesquisado($("#searchbar").val().toLowerCase());
+        if (self.pesquisado().length > 0) {
+            window.location.href = "modalities.html?search=" + self.pesquisado();
+        }
+        console.log(self.pesquisado())
+    }
+    
     //--- start ....
     showLoading();
     var pg = getUrlParameter('page');
+    self.pesquisado = ko.observable(getUrlParameter('search'));
     console.log(pg);
-    if (pg == undefined)
-        self.activate(1);
-    else {
-        self.activate(pg);
+    if (self.pesquisado() == undefined || self.pesquisado() == "" || self.pesquisado() == null) {
+        if (pg == undefined)
+            self.activate(1);
+        else {
+            self.activate(pg);
+        }
+    }else {
+        if (pg == undefined) self.activate2(self.pesquisado(), 1);
+        else self.activate2(self.pesquisado(), pg)
+        self.displayName = 'Found results for ' + self.pesquisado();
     }
     console.log("VM initialized!");
 
