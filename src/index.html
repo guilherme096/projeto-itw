@@ -12,6 +12,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="stylesheet" href="./styles/myCSS.css" />
         <link rel="stylesheet" href="./styles/theme.css" />
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
         <style>
             .carousel {
                 width: 100%;
@@ -63,24 +65,23 @@
                             <a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
                         </li>
                     </ul>
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a href="favorites.html" class="nav-link active"><i class="fa fa-heart-o text-danger"></i> Favorites</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
             <div class="container-fluid col-3 navbar-expand-lg">
                 <form class="d-flex input-group w-auto">
-                  <input
-                    type="search"
-                    class="form-control rounded"
-                    placeholder="Search"
-                    aria-label="Search"
-                    aria-describedby="search-addon"
-                  />
-                  <span class="input-group-text text-white border-0" id="search-addon">
-                    <button type="button" class="btn btn-primary" data-bind="click:pesquisa" style="width: 10%; height: 40px; background-color: #ffc107; border-width: 0px">
-                        <i class="fas fa-search"></i>
-                    </button>
-                  </span>
+                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                    <span class="input-group-text text-white border-0" id="search-addon">
+                        <button type="button" class="btn btn-primary" data-bind="click:pesquisa" style="width: 10%; height: 40px; background-color: #ffc107; border-width: 0px">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </span>
                 </form>
-              </div>
+            </div>
         </nav>
         <!-- Working Area -->
         <div id="carouselExample" class="carousel slide carousel-fade mb-5" data-bs-ride="carousel">
@@ -139,6 +140,5 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        
     </body>
 </html>
