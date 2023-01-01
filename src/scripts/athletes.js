@@ -175,7 +175,7 @@ var vm = function () {
     showLoading();
     var pg = getUrlParameter('page');
     self.pesquisado = ko.observable(getUrlParameter('search'));
-    console.log(pg);
+    console.log("pg = ",pg);
     if (self.pesquisado() == undefined || self.pesquisado() == "" || self.pesquisado() == null) {
         if (pg == undefined)
             self.activate(1);
