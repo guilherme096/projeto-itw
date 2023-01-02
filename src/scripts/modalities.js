@@ -64,6 +64,17 @@ var vm = function () {
             self.favourites(storage);
         }
     }
+
+    self.view = ko.observable(getUrlParameter('view') ? getUrlParameter('view') : 'card');
+    
+    // Function to toggle the view
+    self.toggleTable = function () {
+        self.view('table');
+    };
+    self.toggleCard = function () {
+        self.view('card');
+    };
+
     //--- Page Events
     self.activate = function (id) {
         console.log('CALL: getGames...');
