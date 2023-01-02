@@ -69,6 +69,7 @@
             </div>
         </nav>
         <!-- Work Area-->
+        <!-- ko if: Photo -->
         <div class="jumbotron jumbotron-bg d-flex flex-column-reverse px-4" data-bind="style: { 'background-image': 'url(' + Photo() + ')' }" style="margin-top: 50px; height: 300px; background-size: cover; background-position: center">
             <nav aria-label="breadcrumb text-white">
                 <ol class="breadcrumb" style="background-color: #7a7a7a47">
@@ -77,11 +78,24 @@
                 </ol>
             </nav>
         </div>
+        <!-- /ko -->
+        <!-- ko ifnot: Photo -->
+        <div class="jumbotron jumbotron-bg d-flex flex-column-reverse px-4" style="height: 100px">
+            <nav aria-label="breadcrumb text-white">
+                <ol class="breadcrumb" style="background-color: #7a7a7a47">
+                    <li class="breadcrumb-item active text-white fs-4" aria-current="page">Competitions</li>
+                    <li class="breadcrumb-item active text-white fs-4" aria-current="page" data-bind="text: Name"></li>
+                </ol>
+            </nav>
+        </div>
+        <!-- /ko -->
         <div class="container col-12" style="margin-bottom: 80px; margin-top: 20px">
             <div class="row">
                 <div class="col-md-2">
                     <div class="card">
+                        <!-- ko if: Photo -->
                         <img class="card-img-top" data-bind="attr: { src: Photo }" alt="Photo" />
+                        <!-- /ko -->
                         <div class="card-body">
                             <h4 class="card-title mb-3" data-bind="text: Name"></h4>
                             <p class="card-text"><strong>Id:</strong> <span data-bind="text: Id"></span></p>

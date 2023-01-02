@@ -103,7 +103,10 @@
 
             <div class="row row-cols-4 mx-auto mb-4" data-bind="foreach: records, visible: view() === 'card'">
                 <a data-bind="attr: {href: './competitionDetails.html?id=' + Id}" class="card p-0 m-4 shadow-sm" style="max-width: 540px" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'">
+                    <!-- ko if: Photo -->
                     <img data-bind="attr:{src: Photo}" class="img-fluid mx-auto d-block card-img-top" style="height: 150px; object-fit: cover; transition: all ease-in-out 2000ms" />
+                    <!-- /ko -->
+
                     <div class="card-body">
                         <h5 class="card-title" data-bind="text:Name"></h5>
                         <p class="card-text" data-bind="text:Modality"></p>
@@ -122,6 +125,7 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Photo</th>
                         <th scope="col">Modality</th>
                         <th scope="col">Results</th>
                         <th scope="col" class="text-right"></th>
@@ -131,6 +135,8 @@
                     <tr>
                         <th scope="row" data-bind="text:Id"></th>
                         <td data-bind="text: Name"></td>
+                        <td><img data-bind="attr:{src: Photo}" class="img-fluid" style="height: 50px; object-fit: cover; border: 2px solid black" /></td>
+
                         <td data-bind="text: Modality"></td>
                         <td data-bind="text: Results"></td>
                         <td class="text-end">
