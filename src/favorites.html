@@ -18,14 +18,14 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="index.html" tabindex="Olympics"><img src="http://192.168.160.58/Olympics/Images/Olympic_rings.svg" height="24" /></a>
+                <a class="navbar-brand" href="index.html" tabindex="Olympics"><img src="../images/Olympic_rings.svg" height="24" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="athletes.html"><i class="fa fa-user-o text-warning"></i> Athletes</a>
+                            <a class="nav-link active" aria-current="page" href="athletes.html"><i class="fa fa-user-o text-warning"></i> Athletes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i> Competitions</a>
@@ -39,12 +39,16 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="statistics0.html"><i class="fa fa-bar-chart text-info"></i> Statistics</a>
-                        </li> -->
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="statistics.html"><i class="fa fa-bar-chart text-info" aria-hidden="true"></i> Statistics</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-2">
+                        <li class="nav-item input-group w-100 p-1" style="min-width: 300px; height: 2em; vertical-align: middle">
+                            <input class="col-8 form-control form-degrade w-75" type="search" placeholder="Global Search" aria-label="Search" id="searchbarglobal" />
+                            <button class="col-4 btn btn-xs w-25" data-bind="click:pesquisaGlobal" style="border: 1px solid black" type="submit" id="btnsearchbarglobal"><i class="fas fa-search"></i></button>
+                        </li>
+                        <li class="nav-item w-100">
                             <a href="favorites.html" class="nav-link active"><i class="fa fa-heart-o text-danger"></i> Favorites</a>
                         </li>
                     </ul>
@@ -203,5 +207,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script src="./scripts/favorites.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#btnsearchbarglobal").click(function () {
+                    var search = $("#searchbarglobal").val();
+                    window.location.href = "globalSearch.html?q=" + search;
+                });
+            });
+        </script>
     </body>
 </html>

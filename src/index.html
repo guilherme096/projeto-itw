@@ -50,7 +50,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="athletes.html"><i class="fa fa-user-o text-warning"></i> Athletes</a>
+                            <a class="nav-link active" aria-current="page" href="athletes.html"><i class="fa fa-user-o text-warning"></i> Athletes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="competitions.html"><i class="fa fa-trophy"></i> Competitions</a>
@@ -64,23 +64,20 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
                         </li>
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="statistics.html"><i class="fa fa-bar-chart text-info" aria-hidden="true"></i> Statistics</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-2">
+                        <li class="nav-item input-group w-100 p-1" style="min-width: 300px; height: 2em; vertical-align: middle">
+                            <input class="col-8 form-control form-degrade w-75" type="search" placeholder="Global Search" aria-label="Search" id="searchbarglobal" />
+                            <button class="col-4 btn btn-xs w-25" data-bind="click:pesquisaGlobal" style="border: 1px solid black" type="submit"><i class="fas fa-search"></i></button>
+                        </li>
+                        <li class="nav-item w-100">
                             <a href="favorites.html" class="nav-link active"><i class="fa fa-heart-o text-danger"></i> Favorites</a>
                         </li>
                     </ul>
                 </div>
-            </div>
-            <div class="container-fluid col-3 navbar-expand-lg">
-                <form class="d-flex input-group w-auto">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                    <span class="input-group-text text-white border-0" id="search-addon">
-                        <button type="button" class="btn btn-primary" data-bind="click:pesquisa" style="width: 10%; height: 40px; background-color: #ffc107; border-width: 0px">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </span>
-                </form>
             </div>
         </nav>
         <!-- Working Area -->
@@ -136,9 +133,10 @@
                 </div>
             </div>
         </nav>
-        <script src="myScript.js"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="./scripts/myScript.js"></script>
     </body>
 </html>

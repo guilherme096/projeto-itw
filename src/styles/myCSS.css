@@ -158,3 +158,24 @@ body {
 .single-timeline-area .single-timeline-content:focus .timeline-text h6 {
     color: #3f43fd;
 }
+li > .form-degrade {
+    background: linear-gradient(to right, #2c6dd5 20%, #ffc107 35%, #ffc107 40%, #198754 65%, #dc3545 90%);
+    color: white;
+}
+li > .form-degrade::placeholder {
+    color: white;
+}
+
+li > .form-degrade:focus {
+    color: white;
+}
+li > .form-degrade:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+/* dont allow the input to get smaller when clicked */
+li > .form-degrade:focus {
+    width: 100%;
+}

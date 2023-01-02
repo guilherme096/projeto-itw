@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="./styles/theme.css" />
         <style>
             .cards {
-                margin-right: 10px;
+                margin-right: 18px;
                 width: 24%;
                 height: fit-content;
                 border: 3px solid #ffc107;
@@ -72,8 +72,12 @@
                             <a class="nav-link" aria-current="page" href="statistics.html"><i class="fa fa-bar-chart text-info" aria-hidden="true"></i> Statistics</a>
                         </li>
                     </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item">
+                    <ul class="navbar-nav mb-2">
+                        <li class="nav-item input-group w-100 p-1" style="min-width: 300px; height: 2em; vertical-align: middle">
+                            <input class="col-8 form-control form-degrade w-75" type="search" placeholder="Global Search" aria-label="Search" id="searchbarglobal" />
+                            <button class="col-4 btn btn-xs w-25" data-bind="click:pesquisaGlobal" style="border: 1px solid black" type="submit"><i class="fas fa-search"></i></button>
+                        </li>
+                        <li class="nav-item w-100">
                             <a href="favorites.html" class="nav-link active"><i class="fa fa-heart-o text-danger"></i> Favorites</a>
                         </li>
                     </ul>
@@ -197,8 +201,8 @@
 
             <!-- /pagination -->
 
-            <div class="row row-cols-4" data-bind="foreach: {data: records, afterRender: mostrarTooltips}, visible: view() === 'card'">
-                <div class="card mb-3 cards" style="max-width: 540px">
+            <div style="margin-top: 20px" class="row row-cols-4" data-bind="foreach: {data: records, afterRender: mostrarTooltips}, visible: view() === 'card'">
+                <div class="card mb-3 cards" style="max-width: 23%">
                     <div class="row g-0">
                         <!-- ko if: Photo -->
                         <div class="col-md-4">
@@ -217,10 +221,12 @@
                                 <p class="card-text" data-bind="text: 'Best position: ' + BestPosition"></p>
                                 <p class="card-text">
                                     <a class="btn btn-warning btn-xs" data-bind="attr: { href:'./athleteDetails.html?id=' + Id }" style="color: white" title="Details of this athlete"> <i class="fa-solid fa-plus"></i> Details </a>
-                                    <button data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-default btn-xs btn-favourite">
+                                </p>
+                                <span class="position-absolute top-0 start-100 translate-middle border border-light rounded-circle" style="padding: 2px; background-color: #ffbf00; z-index: 10">
+                                    <button style="font-size: large" data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-xs btn-favourite text-danger">
                                         <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Favorite"></i>
                                     </button>
-                                </p>
+                                </span>
                             </div>
                         </div>
                         <!-- /ko -->
@@ -237,11 +243,13 @@
                                 <!-- /ko -->
                                 <p class="card-text" data-bind="text: 'Best position: ' + BestPosition"></p>
                                 <p class="card-text">
-                                    <a class="btn btn-warning btn-xs" data-bind="attr: { href:'./athleteDetails.html?id=' + Id }" style="color: white"> <i class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
-                                    <button data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-default btn-xs btn-favourite">
-                                        <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Selecione para adicionar aos favoritos"></i>
-                                    </button>
+                                    <a class="btn btn-warning btn-xs" data-bind="attr: { href:'./athleteDetails.html?id=' + Id }" style="color: white" title="Details of this athlete"> <i class="fa-solid fa-plus"></i> Details </a>
                                 </p>
+                                <span class="position-absolute top-0 start-100 translate-middle border border-light rounded-circle" style="padding: 2px; background-color: #ffbf00; z-index: 10">
+                                    <button style="font-size: large" data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-xs btn-favourite text-danger">
+                                        <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Favorite"></i>
+                                    </button>
+                                </span>
                             </div>
                         </div>
                         <!-- /ko -->

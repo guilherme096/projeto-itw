@@ -173,6 +173,14 @@ var vm = function () {
         console.log(self.pesquisado());
     };
 
+    self.pesquisaGlobal = function() {
+        console.log("pesquisa global...");
+        console.log($("#searchbarglobal").val().toLowerCase());
+        if ($("#searchbarglobal").val().toLowerCase().length > 0) {
+            window.location.href = "globalSearch.html?q=" + $("#searchbarglobal").val().toLowerCase(); //+"&view="+self.view();
+        }
+    }
+
     //--- start ....
     showLoading();
     var pg = getUrlParameter("page");
