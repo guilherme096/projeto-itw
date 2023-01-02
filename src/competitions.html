@@ -87,19 +87,78 @@
                 </div>
             </div>
 
+            <!-- pagination -->
+
+            <!-- ko ifnot: pesquisado() -->
             <!-- ko if:records().length > 0 -->
             <div class="row small">
-                <p class="col-4 mr-auto pt-2">
+                <p class="col-5 mr-auto pt-2">
                     <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
                     <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
                 </p>
-                <div class="btn-group col-1 ms-auto" role="group" aria-label="View options" style="display: flex; align-items: center">
+                <div class="btn-group col-1 m-auto" role="group" aria-label="View options" style="display: flex; align-items: center">
                     <button type="button" class="btn btn-primary btn-sm" style="color: white; background-color: black; border: 1px solid white" data-bind="click: toggleCard, css: { 'active': view() === 'card' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-table"></i></button>
                     <button type="button" class="btn btn-primary btn-sm" style="color: white; background-color: black; border: 1px solid white" data-bind="click: toggleTable, css: { 'active': view() === 'table' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-list"></i></button>
                 </div>
+                <div class="col-5 my-0 ms-auto pt-3">
+                    <ul class="pagination float-end">
+                        <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
+                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'competitions.html?page=' + '1',  rel:'prev'}">⇤</a></li>
+                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'competitions.html?page=' + previousPage(),  rel:'prev'}">←</a></li>
+                        <!-- /ko -->
+                        <!-- ko foreach: pageArray()-->
+                        <!-- ko if:$data == $parent.currentPage() -->
+                        <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
+                        <!-- /ko -->
+                        <!-- ko if:$data != $parent.currentPage() -->
+                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'competitions.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
+                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'competitions.html?page=' + nextPage(), rel:'next' }">→</a></li>
+                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'competitions.html?page=' + totalPages() }">⇥</a></li>
+                        <!-- /ko -->
+                    </ul>
+                </div>
             </div>
-
             <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: pesquisado() -->
+            <!-- ko if: records().length > 0 -->
+            <div class="row small">
+                <p class="col-5 mr-auto pt-2">
+                    <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
+                    <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+                </p>
+                <div class="btn-group col-1 m-auto" role="group" aria-label="View options" style="display: flex; align-items: center">
+                    <button type="button" class="btn btn-primary btn-sm" style="color: white; background-color: black; border: 1px solid white" data-bind="click: toggleCard, css: { 'active': view() === 'card' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-table"></i></button>
+                    <button type="button" class="btn btn-primary btn-sm" style="color: white; background-color: black; border: 1px solid white" data-bind="click: toggleTable, css: { 'active': view() === 'table' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-list"></i></button>
+                </div>
+                <div class="col-5 ms-auto my-0 pt-3">
+                    <ul class="pagination float-end">
+                        <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
+                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'competitions.html?search='+ pesquisado() + '&page=1',  rel:'prev'}">⇤</a></li>
+                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'competitions.html?search='+ pesquisado() + '&page=' + previousPage(),  rel:'prev'}">←</a></li>
+                        <!-- /ko -->
+                        <!-- ko foreach: pageArray()-->
+                        <!-- ko if:$data == $parent.currentPage() -->
+                        <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
+                        <!-- /ko -->
+                        <!-- ko if:$data != $parent.currentPage() -->
+                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'competitions.html?search='+ $parent.pesquisado() + '&page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
+                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'competitions.html?search='+ pesquisado() + '&page=' + nextPage(), rel:'next' }">→</a></li>
+                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'competitions.html?search='+ pesquisado() + '&page=' + totalPages() }">⇥</a></li>
+                        <!-- /ko -->
+                    </ul>
+                </div>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+
+            <!-- /pagination -->
 
             <div class="row row-cols-4 mx-auto mb-4" data-bind="foreach: records, visible: view() === 'card'">
                 <a data-bind="attr: {href: './competitionDetails.html?id=' + Id}" class="card p-0 m-4 shadow-sm" style="max-width: 540px" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'">
@@ -111,7 +170,7 @@
                         <h5 class="card-title" data-bind="text:Name"></h5>
                         <p class="card-text" data-bind="text:Modality"></p>
 
-                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                        <span class="position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle" style="background-color: black">
                             <button style="color: white" data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-xs btn-favourite">
                                 <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Favorite"></i>
                             </button>
@@ -154,71 +213,6 @@
                     </tr>
                 </tbody>
             </table>
-
-            <!-- pagination -->
-
-            <!-- ko ifnot: pesquisado() -->
-            <!-- ko if:records().length > 0 -->
-            <div class="row small">
-                <p class="col-4 mr-auto pt-2">
-                    <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                    <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
-                </p>
-                <div class="col-8 my-0 pt-3">
-                    <ul class="pagination float-end">
-                        <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
-                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'competitions.html?page=' + '1',  rel:'prev'}">⇤</a></li>
-                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'competitions.html?page=' + previousPage(),  rel:'prev'}">←</a></li>
-                        <!-- /ko -->
-                        <!-- ko foreach: pageArray()-->
-                        <!-- ko if:$data == $parent.currentPage() -->
-                        <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
-                        <!-- /ko -->
-                        <!-- ko if:$data != $parent.currentPage() -->
-                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'competitions.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
-                        <!-- /ko -->
-                        <!-- /ko -->
-                        <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
-                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'competitions.html?page=' + nextPage(), rel:'next' }">→</a></li>
-                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'competitions.html?page=' + totalPages() }">⇥</a></li>
-                        <!-- /ko -->
-                    </ul>
-                </div>
-            </div>
-            <!-- /ko -->
-            <!-- /ko -->
-            <!-- ko if: pesquisado() -->
-            <!-- ko if: records().length > 0 -->
-            <div class="row small">
-                <p class="col-4 mr-auto pt-2">
-                    <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                    <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
-                </p>
-                <div class="col-8 my-0 pt-3">
-                    <ul class="pagination float-end">
-                        <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
-                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'competitions.html?search='+ pesquisado() + '&page=1',  rel:'prev'}">⇤</a></li>
-                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'competitions.html?search='+ pesquisado() + '&page=' + previousPage(),  rel:'prev'}">←</a></li>
-                        <!-- /ko -->
-                        <!-- ko foreach: pageArray()-->
-                        <!-- ko if:$data == $parent.currentPage() -->
-                        <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
-                        <!-- /ko -->
-                        <!-- ko if:$data != $parent.currentPage() -->
-                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'competitions.html?search='+ $parent.pesquisado() + '&page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
-                        <!-- /ko -->
-                        <!-- /ko -->
-                        <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
-                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'competitions.html?search='+ pesquisado() + '&page=' + nextPage(), rel:'next' }">→</a></li>
-                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'competitions.html?search='+ pesquisado() + '&page=' + totalPages() }">⇥</a></li>
-                        <!-- /ko -->
-                    </ul>
-                </div>
-            </div>
-            <!-- /ko -->
-            <!-- /ko -->
-
-            <!-- /pagination -->
         </div>
 
         <!-- Modal -->

@@ -148,6 +148,7 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Sex</th>
                                         <th scope="col">Best Position</th>
+                                        <th scope="col" class="text-right"></th>
                                     </tr>
                                 </thead>
                                 <tbody data-bind="foreach: Athletes">
@@ -163,6 +164,11 @@
                                         <td data-bind="text: Name"></td>
                                         <td data-bind="text: Sex"></td>
                                         <td data-bind="text: BestPosition"></td>
+                                        <td class="text-end">
+                                            <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./athleteDetails.html?id=' + Id }">
+                                                <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -178,6 +184,7 @@
                                     <tr>
                                         <th scope="col">Photo</th>
                                         <th scope="col">Name</th>
+                                        <th scope="col" class="text-right"></th>
                                     </tr>
                                 </thead>
                                 <tbody data-bind="foreach: Modalities">
@@ -191,6 +198,11 @@
                                             <!-- /ko -->
                                         </th>
                                         <td data-bind="text: Name"></td>
+                                        <td class="text-end">
+                                            <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./modalityDetails.html?id=' + Id }">
+                                                <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -207,6 +219,7 @@
                                         <th scope="col">Photo</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Modality</th>
+                                        <th scope="col" class="text-right"></th>
                                     </tr>
                                 </thead>
                                 <tbody data-bind="foreach: Competitions">
@@ -222,6 +235,11 @@
                                         <td data-bind="text: Name"></td>
                                         <td data-bind="text: Modality"></td>
                                         <td data-bind="text: Results"></td>
+                                        <td class="text-end">
+                                            <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./competitionDetails.html?id=' + Id }">
+                                                <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

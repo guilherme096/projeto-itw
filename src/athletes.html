@@ -37,6 +37,9 @@
             .page-link {
                 color: #ffc107;
             }
+            .dropdown-item > i {
+                color: #ffc107;
+            }
         </style>
 
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -102,23 +105,39 @@
             <div class="row small">
                 <p class="col-4 mr-auto pt-2">
                     <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                    <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+                    <span data-bind="html: 'Athletes: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
                 </p>
-                <div class="col-4 pt-2">
+                <div class="col-1 pt-2">
                     <div class="btn-group dropend">
                         <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
                         <ul class="dropdown-menu">
                             <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="Id">Id</button></li>
-                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="NameUp">Name Up</button></li>
-                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="NameDn">Name Down</button></li>
-                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="HeightUp">Height Up</button></li>
-                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="HeightDn">Height Down</button></li>
-                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="SexUp">Sex Up</button></li>
-                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="SexDn">Sex Down</button></li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="NameUp">Name <i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="NameDn">Name <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="HeightUp">Height <i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="HeightDn">Height <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="SexUp">Sex <i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="SexDn">Sex <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+                            </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-4 my-0 pt-3">
+                <div class="btn-group col-1 m-auto" role="group" aria-label="View options" style="display: flex; align-items: center">
+                    <button type="button" class="btn btn-warning btn-sm" style="color: white; border: 1px solid white" data-bind="click: toggleCard, css: { 'active': view() === 'card' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-table"></i></button>
+                    <button type="button" class="btn btn-warning btn-sm" style="color: white; border: 1px solid white" data-bind="click: toggleTable, css: { 'active': view() === 'table' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-list"></i></button>
+                </div>
+                <div class="col-4 ms-auto my-0 pt-3">
                     <ul class="pagination float-end">
                         <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
                         <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'athletes.html?page=' + '1',  rel:'prev'}">⇤</a></li>
@@ -146,7 +165,7 @@
             <div class="row small">
                 <p class="col-4 mr-auto pt-2">
                     <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
-                    <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+                    <span data-bind="html: 'Athletes: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
                 </p>
                 <div class="col-8 my-0 pt-3">
                     <ul class="pagination float-end">
@@ -174,7 +193,7 @@
 
             <!-- /pagination -->
 
-            <div class="row row-cols-4" data-bind="foreach: {data: records, afterRender: mostrarTooltips}">
+            <div class="row row-cols-4" data-bind="foreach: {data: records, afterRender: mostrarTooltips}, visible: view() === 'card'">
                 <div class="card mb-3 cards" style="max-width: 540px">
                     <div class="row g-0">
                         <!-- ko if: Photo -->
@@ -225,6 +244,43 @@
                     </div>
                 </div>
             </div>
+
+            <table class="table table-striped table-sm small" data-bind="visible: view() === 'table'">
+                <thead class="bg-dark text-light">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Sex</th>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Best Position</th>
+                        <th scope="col" class="text-right"></th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: records">
+                    <tr>
+                        <td class="align-middle" data-bind="text:Id"></td>
+                        <td class="align-middle" data-bind="text:Name"></td>
+                        <td class="align-middle" data-bind="text:Sex"></td>
+                        <td class="align-middle">
+                            <!-- ko if : Photo -->
+                            <img data-bind="attr:{src:Photo}" alt="Photo" style="max-width: 100px; max-height: 100px" />
+                            <!-- /ko -->
+                            <!-- ko ifnot : Photo -->
+                            <i class="fa-regular fa-user"></i>
+                            <!-- /ko -->
+                        </td>
+                        <td class="align-middle" data-bind="text:BestPosition"></td>
+                        <td class="text-end">
+                            <a class="btn btn-default btn-light btn-xs" data-bind="attr: { href:'./athleteDetails.html?id=' + Id }">
+                                <i class="fa fa-eye" title="Selecione para ver detalhes"></i>
+                            </a>
+                            <button data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-default btn-xs btn-favourite">
+                                <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Favorite"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
