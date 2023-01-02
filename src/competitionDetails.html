@@ -79,7 +79,7 @@
         </div>
         <div class="container col-12" style="margin-bottom: 80px; margin-top: 20px">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="card">
                         <img class="card-img-top" data-bind="attr: { src: Photo }" alt="Photo" />
                         <div class="card-body">
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <div class="col-md-12">
                         <div class="accordion">
                             <div class="accordion-item">
@@ -111,6 +111,7 @@
                                                 <th scope="col">Logo</th>
                                                 <th scope="col">Lat</th>
                                                 <th scope="col">Lon</th>
+                                                <th scope="col">Details</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="foreach: Participant">
@@ -131,6 +132,9 @@
                                                 <td><img data-bind="attr: { src: Logo }" alt="Logo" style="width: 100px" /></td>
                                                 <td data-bind="text: Lat"></td>
                                                 <td data-bind="text: Lon"></td>
+                                                <td>
+                                                    <a class="btn btn-xs" style="background-color: #a3a3a3; float: right" data-bind="attr:{href: 'gameDetails.html?id=' + Id}" style="margin-top: 10px"><i class="fa fa-eye" title="Selecione para ver detalhes"></i></a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -170,6 +174,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.2/jquery.min.js" integrity="sha512-tWHlutFnuG0C6nQRlpvrEhE4QpkG1nn2MOUMWmUeRePl4e3Aki0VB6W1v3oLjFtd0hVOtRQ9PHpSfN6u6/QXkQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.min.js" integrity="sha512-1/RvZTcCDEUjY/CypiMz+iqqtaoQfAITmNSJY17Myp4Ms5mdxPS5UV7iOfdZoxcGhzFbOm6sntTKJppjvuhg4g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="./scripts/competitionFull.js" type="module"></script>
+        <script src="./scripts/competitionDetails.js" type="module"></script>
     </body>
 </html>
