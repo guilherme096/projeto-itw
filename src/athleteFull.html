@@ -148,41 +148,42 @@
                                 </h2>
                                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <div class="row" data-bind="foreach: Games">
-                                            <div class="col-sm-4" style="margin-top: 20px">
-                                                <div class="card" style="width: 18rem">
-                                                    <img data-bind="attr:{src: Photo}" class="card-img-top" />
-                                                    <div class="card-body">
-                                                        <h5 class="card-title" data-bind="text: Name"></h5>
-                                                        <ul class="card-text list-group list-group-horizontal">
-                                                            <li class="list-group-item" style="width: 100px">ID</li>
-                                                            <li class="list-group-item" data-bind="text: Id"></li>
-                                                        </ul>
-                                                        <ul class="card-text list-group list-group-horizontal">
-                                                            <li class="list-group-item" style="width: 100px">Year</li>
-                                                            <li class="list-group-item" data-bind="text: Year"></li>
-                                                        </ul>
-                                                        <ul class="card-text list-group list-group-horizontal">
-                                                            <li class="list-group-item" style="width: 100px">CityName</li>
-                                                            <li class="list-group-item" data-bind="text: CityName"></li>
-                                                        </ul>
-                                                        <ul class="card-text list-group list-group-horizontal">
-                                                            <li class="list-group-item" style="width: 100px">CountryName</li>
-                                                            <li class="list-group-item" data-bind="text: CountryName"></li>
-                                                        </ul>
-                                                        <ul class="card-text list-group list-group-horizontal">
-                                                            <li class="list-group-item" style="width: 100px">CityName</li>
-                                                            <li class="list-group-item" data-bind="text: CityName"></li>
-                                                        </ul>
-                                                        <ul class="card-text list-group list-group-horizontal">
-                                                            <li class="list-group-item" style="width: 100px">Logo</li>
-                                                            <li class="list-group-item"><img data-bind="attr: {src: Logo}" style="width: 100px" /></li>
-                                                        </ul>
-                                                        <a class="btn btn-warning" data-bind="attr:{href: 'gameDetails.html?id=' + Id}" style="margin-top: 10px">More details</a>
-                                                    </div>
+                                        <!-- ko foreach: Games -->
+                                        <div class="col-5" style="margin-top: 20px">
+                                            <div class="card" style="width: 100%">
+                                                <img data-bind="attr:{src: Photo}" class="card-img-top" style="max-height: 300px" />
+                                                <div class="card-body">
+                                                    <h5 class="card-title" data-bind="text: Name"></h5>
+                                                    <ul class="card-text list-group list-group-horizontal">
+                                                        <li class="list-group-item" style="width: 100px">ID</li>
+                                                        <li class="list-group-item" data-bind="text: Id"></li>
+                                                    </ul>
+                                                    <ul class="card-text list-group list-group-horizontal">
+                                                        <li class="list-group-item" style="width: 100px">Year</li>
+                                                        <li class="list-group-item" data-bind="text: Year"></li>
+                                                    </ul>
+                                                    <ul class="card-text list-group list-group-horizontal">
+                                                        <li class="list-group-item" style="width: 100px">CityName</li>
+                                                        <li class="list-group-item" data-bind="text: CityName"></li>
+                                                    </ul>
+                                                    <ul class="card-text list-group list-group-horizontal">
+                                                        <li class="list-group-item" style="width: 100px">CountryName</li>
+                                                        <li class="list-group-item" data-bind="text: CountryName"></li>
+                                                    </ul>
+                                                    <ul class="card-text list-group list-group-horizontal">
+                                                        <li class="list-group-item" style="width: 100px">CityName</li>
+                                                        <li class="list-group-item" data-bind="text: CityName"></li>
+                                                    </ul>
+                                                    <ul class="card-text list-group list-group-horizontal">
+                                                        <li class="list-group-item" style="width: 100px">Logo</li>
+                                                        <li class="list-group-item"><img data-bind="attr: {src: Logo}" style="max-width: 100px; max-height: 200px" /></li>
+                                                    </ul>
+                                                    <a class="btn btn-warning" data-bind="attr:{href: 'gameDetails.html?id=' + Id}" style="margin-top: 10px">More details</a>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- /ko -->
                                     </div>
                                 </div>
                             </div>

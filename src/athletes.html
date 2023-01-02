@@ -104,7 +104,21 @@
                     <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
                     <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
                 </p>
-                <div class="col-8 my-0 pt-3">
+                <div class="col-4 pt-2">
+                    <div class="btn-group dropend">
+                        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
+                        <ul class="dropdown-menu">
+                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="Id">Id</button></li>
+                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="NameUp">Name Up</button></li>
+                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="NameDn">Name Down</button></li>
+                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="HeightUp">Height Up</button></li>
+                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="HeightDn">Height Down</button></li>
+                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="SexUp">Sex Up</button></li>
+                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="SexDn">Sex Down</button></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-4 my-0 pt-3">
                     <ul class="pagination float-end">
                         <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
                         <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'athletes.html?page=' + '1',  rel:'prev'}">⇤</a></li>
@@ -170,6 +184,7 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #ffbf00"></h5>
+                                <p class="card-text" style="margin: 0; width: fit-content" data-bind="text: 'Id: ' + Id"></p>
                                 <!-- ko if: Sex == "M" -->
                                 <p class="card-text" style="margin: 0; width: fit-content" data-bs-toggle="tooltip" title="Masculino" data-bs-placement="right">Sex: <i class="fa fa-mars" aria-hidden="true" style="font-weight: bold"></i></p>
                                 <!-- /ko -->
@@ -190,6 +205,7 @@
                         <div class="col-md-12">
                             <div class="card-body">
                                 <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #ffbf00">Card title</h5>
+                                <p class="card-text" style="margin: 0; width: fit-content" data-bind="text: 'Id: ' + Id"></p>
                                 <!-- ko if: Sex == "M" -->
                                 <p class="card-text card-sex" style="margin: 0; width: fit-content" data-bs-toggle="tooltip" title="Masculino" data-bs-placement="right">Sex: <i class="fa fa-mars" aria-hidden="true" style="font-weight: bold"></i></p>
                                 <!-- /ko -->

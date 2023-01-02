@@ -67,7 +67,7 @@ var vm = function () {
         }
     }
     self.view = ko.observable(getUrlParameter('view') ? getUrlParameter('view') : 'timeline');
-
+    
     // Function to toggle the view
     self.toggleTable = function () {
         self.view('table');
@@ -75,6 +75,7 @@ var vm = function () {
     self.toggleTimeline = function () {
         self.view('timeline');
     };
+
 
     //--- Page Events
     self.activate = function (id) {
@@ -112,6 +113,7 @@ var vm = function () {
             self.totalPages(data.TotalPages);
             self.totalRecords(data.TotalRecords);
             self.SetFavourites();
+
         });
     };
 

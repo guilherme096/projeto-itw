@@ -113,6 +113,24 @@ var vm = function () {
         });
     };
 
+    self.activate3 = function (filter, page) {
+        console.log('CALL: filterAthletes...');
+        var composedUri = "http://192.168.160.58/Olympics/api/Athletes?page="+page+"&pagesize=20&sortby=" + filter;
+        ajaxHelper(composedUri, 'GET').done(function (data) {
+            console.log("filterAthletes", data);
+            hideLoading();
+            self.records(data.Records);
+            self.currentPage(data.CurrentPage);
+            self.hasNext(data.HasNext);
+            self.hasPrevious(data.HasPrevious);
+            self.pagesize(data.PageSize)
+            self.totalPages(data.TotalPages);
+            self.totalRecords(data.TotalRecords);
+            self.SetFavourites();
+            
+        });
+    };
+
     //--- Internal functions
     function ajaxHelper(uri, method, data) {
         self.error(''); // Clear error message
@@ -171,20 +189,43 @@ var vm = function () {
         console.log(self.pesquisado())
     }
 
+    self.filtrar = function() {
+        console.log("filtrar...");
+        var filtro = $(event.target).val();
+        
+        self.filtroAplicar(filtro);
+        if (self.filtroAplicar().length > 0) {
+            window.location.href = "athletes.html?sortby=" + self.filtroAplicar();
+        }
+        console.log(self.filtroAplicar())
+    }
+
     //--- start ....
     showLoading();
     var pg = getUrlParameter('page');
     self.pesquisado = ko.observable(getUrlParameter('search'));
+    self.filtroAplicar = ko.observable(getUrlParameter('sortby'));
     console.log("pg = ",pg);
     if (self.pesquisado() == undefined || self.pesquisado() == "" || self.pesquisado() == null) {
-        if (pg == undefined)
-            self.activate(1);
-        else {
-            self.activate(pg);
+        if (self.filtroAplicar() == undefined || self.filtroAplicar() == "" || self.filtroAplicar() == null) {
+            if (pg == undefined)
+                self.activate(1);
+            else {
+                self.activate(pg);
+            }
+        } else {
+            if (pg == undefined)
+                self.activate3(self.filtroAplicar(), 1);
+            else {
+                self.activate3(self.filtroAplicar(), pg);
+            }
         }
     }else {
-        if (pg == undefined) self.activate2(self.pesquisado(), 1);
-        else self.activate2(self.pesquisado(), pg)
+        if (pg == undefined)
+            self.activate2(self.pesquisado(), 1);
+        else {
+            self.activate2(self.pesquisado(), pg);
+        }
         self.displayName = 'Found results for ' + self.pesquisado();
     }
     console.log("VM initialized!");
