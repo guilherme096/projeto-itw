@@ -135,8 +135,12 @@
                     <tr>
                         <th scope="row" data-bind="text:Id"></th>
                         <td data-bind="text: Name"></td>
+                        <!-- ko if: Photo -->
                         <td><img data-bind="attr:{src: Photo}" class="img-fluid" style="height: 50px; object-fit: cover; border: 2px solid black" /></td>
-
+                        <!-- /ko -->
+                        <!-- ko ifnot: Photo -->
+                        <td></td>
+                        <!-- /ko -->
                         <td data-bind="text: Modality"></td>
                         <td data-bind="text: Results"></td>
                         <td class="text-end">
