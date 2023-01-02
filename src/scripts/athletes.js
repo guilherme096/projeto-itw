@@ -193,7 +193,7 @@ var vm = function () {
         console.log("pesquisar...");
         self.pesquisado($("#searchbar").val().toLowerCase());
         if (self.pesquisado().length > 0) {
-            window.location.href = "athletes.html?search=" + self.pesquisado();
+            window.location.href = "athletes.html?search=" + self.pesquisado() +"&view="+self.view();
         }
         console.log(self.pesquisado())
     }
@@ -204,7 +204,7 @@ var vm = function () {
         
         self.filtroAplicar(filtro);
         if (self.filtroAplicar().length > 0) {
-            window.location.href = "athletes.html?sortby=" + self.filtroAplicar();
+            window.location.href = "athletes.html?sortby=" + self.filtroAplicar() + "&view=" + self.view();
         }
         console.log(self.filtroAplicar())
     }

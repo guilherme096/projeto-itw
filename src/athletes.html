@@ -140,20 +140,20 @@
                 <div class="col-4 ms-auto my-0 pt-3">
                     <ul class="pagination float-end">
                         <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
-                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'athletes.html?page=' + '1',  rel:'prev'}">⇤</a></li>
-                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'athletes.html?page=' + previousPage(),  rel:'prev'}">←</a></li>
+                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'athletes.html?page=' + '1' + '&view=' + view(),  rel:'prev'}">⇤</a></li>
+                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'athletes.html?page=' + previousPage()  + '&view=' + view(),  rel:'prev'}">←</a></li>
                         <!-- /ko -->
                         <!-- ko foreach: pageArray()-->
                         <!-- ko if:$data == $parent.currentPage() -->
                         <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
                         <!-- /ko -->
                         <!-- ko if:$data != $parent.currentPage() -->
-                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'athletes.html?page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
+                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'athletes.html?page=' + $data + '&view=' + $parent.view(), title:'Goto Page ' + $data }, text:$data"></a></li>
                         <!-- /ko -->
                         <!-- /ko -->
                         <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
-                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'athletes.html?page=' + nextPage(), rel:'next' }">→</a></li>
-                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'athletes.html?page=' + totalPages() }">⇥</a></li>
+                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'athletes.html?page=' + nextPage() + '&view=' + view(), rel:'next' }">→</a></li>
+                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'athletes.html?page=' + totalPages() + '&view=' + view() }">⇥</a></li>
                         <!-- /ko -->
                     </ul>
                 </div>
@@ -174,20 +174,20 @@
                 <div class="col-4 ms-auto my-0 pt-3">
                     <ul class="pagination float-end">
                         <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
-                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'athletes.html?search='+ pesquisado() + '&page=1',  rel:'prev'}">⇤</a></li>
-                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'athletes.html?search='+ pesquisado() + '&page=' + previousPage(),  rel:'prev'}">←</a></li>
+                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'athletes.html?search='+ pesquisado() + '&page=1'  + '&view=' + view(),  rel:'prev'}">⇤</a></li>
+                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'athletes.html?search='+ pesquisado() + '&page=' + previousPage()  + '&view=' + view(),  rel:'prev'}">←</a></li>
                         <!-- /ko -->
                         <!-- ko foreach: pageArray()-->
                         <!-- ko if:$data == $parent.currentPage() -->
                         <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
                         <!-- /ko -->
                         <!-- ko if:$data != $parent.currentPage() -->
-                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'athletes.html?search='+ $parent.pesquisado() + '&page=' + $data, title:'Goto Page ' + $data }, text:$data"></a></li>
+                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'athletes.html?search='+ $parent.pesquisado() + '&page=' + $data  + '&view=' + $parent.view(), title:'Goto Page ' + $data }, text:$data"></a></li>
                         <!-- /ko -->
                         <!-- /ko -->
                         <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
-                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'athletes.html?search='+ pesquisado() + '&page=' + nextPage(), rel:'next' }">→</a></li>
-                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'athletes.html?search='+ pesquisado() + '&page=' + totalPages() }">⇥</a></li>
+                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'athletes.html?search='+ pesquisado() + '&page=' + nextPage()  + '&view=' + $parent.view(), rel:'next' }">→</a></li>
+                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'athletes.html?search='+ pesquisado() + '&page=' + totalPages()  + '&view=' + $parent.view()}">⇥</a></li>
                         <!-- /ko -->
                     </ul>
                 </div>
