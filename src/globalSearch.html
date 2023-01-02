@@ -54,7 +54,8 @@
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a href="favorites.html" class="nav-link active"><i class="fa fa-heart-o text-danger"></i> Favorites</a>
+                        <a href="favorites.html" class="nav-link active"><i class="fa fa-heart-o text-danger"></i>
+                            Favorites</a>
                     </li>
                 </ul>
             </div>
@@ -70,9 +71,9 @@
             <div class="card mb-3 cards" style="max-width: 540px">
                 <div class="row g-0">
                     <!-- ko if: type == "Athlete" -->
-                    <!-- ko if: photo -->
+                    <!-- ko if: Photo -->
                     <div class="col-md-4">
-                        <img data-bind="attr:{src: photo}" class="img-fluid rounded-start card-img" alt="..." />
+                        <img data-bind="attr:{src: Photo}" class="img-fluid rounded-start card-img" alt="..." />
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
@@ -87,7 +88,6 @@
                                 title="Feminino" data-bs-placement="right">Sex: <i class="fa fa-venus"
                                     aria-hidden="true" style="font-weight: bold"></i></p>
                             <!-- /ko -->
-                            <p class="card-text" data-bind="text: 'Best position: ' + BestPosition"></p>
                             <p class="card-text">
                                 <a class="btn btn-warning btn-xs"
                                     data-bind="attr: { href:'./athleteDetails.html?id=' + Id }" style="color: white"> <i
@@ -96,8 +96,31 @@
                         </div>
                     </div>
                     <!-- /ko -->
-                    <!-- ko ifnot: photo -->
-
+                    <!-- ko ifnot: Photo -->
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #ffbf00">Card
+                                title</h5>
+                            <p class="card-text" style="margin: 0; width: fit-content" data-bind="text: 'Id: ' + Id">
+                            </p>
+                            <!-- ko if: Sex == "M" -->
+                            <p class="card-text card-sex" style="margin: 0; width: fit-content" data-bs-toggle="tooltip"
+                                title="Masculino" data-bs-placement="right">Sex: <i class="fa fa-mars"
+                                    aria-hidden="true" style="font-weight: bold"></i></p>
+                            <!-- /ko -->
+                            <!-- ko if: Sex == "F" -->
+                            <p class="card-text card-sex" style="margin: 0; width: fit-content" data-bs-toggle="tooltip"
+                                title="Feminino" data-bs-placement="right">Sex: <i class="fa fa-venus"
+                                    aria-hidden="true" style="font-weight: bold"></i></p>
+                            <!-- /ko -->
+                            <p class="card-text">
+                                <a class="btn btn-warning btn-xs"
+                                    data-bind="attr: { href:'./athleteDetails.html?id=' + Id }" style="color: white"> <i
+                                        class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /ko -->
                     <!-- Modal -->
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                         aria-hidden="true">
@@ -112,6 +135,98 @@
                                     <i class="fa fa-spin fa-3x fa-refresh"></i>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: type == "Game"-->
+                    <!-- ko if: Photo -->
+                    <div class="col-md-4">
+                        <img data-bind="attr:{src: Photo}" class="img-fluid rounded-start card-img" alt="..." />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #ffbf00"></h5>
+                            <p class="card-text" style="margin: 0; width: fit-content" data-bind="text: 'Country: ' + Country">
+                            <p class="card-text">
+                                <a class="btn btn-warning btn-xs"
+                                    data-bind="attr: { href:'./gameDetails.html?id=' + Id }" style="color: white"> <i
+                                        class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: Photo -->
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #ffbf00"></h5>
+                            <p class="card-text" style="margin: 0; width: fit-content" data-bind="text: 'Country: ' + Country">
+                            <p class="card-text">
+                                <a class="btn btn-warning btn-xs"
+                                    data-bind="attr: { href:'./gameDetails.html?id=' + Id }" style="color: white"> <i
+                                        class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if: type == "Competition"-->
+                    <!-- ko if: Photo -->
+                    <div class="col-md-4">
+                        <img data-bind="attr:{src: Photo}" class="img-fluid rounded-start card-img" alt="..." />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #ffbf00"></h5>
+                            <p class="card-text" style="margin: 0; width: fit-content" data-bind="text: 'Modality: ' + Modality">
+                            <p class="card-text">
+                                <a class="btn btn-warning btn-xs"
+                                    data-bind="attr: { href:'./modalityDetails.html?id=' + Id }" style="color: white"> <i
+                                        class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: Photo -->
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #ffbf00"></h5>
+                            <p class="card-text" style="margin: 0; width: fit-content" data-bind="text: 'Modality: ' + Modality">
+                            <p class="card-text">
+                                <a class="btn btn-warning btn-xs"
+                                    data-bind="attr: { href:'./modalityDetails.html?id=' + Id }" style="color: white"> <i
+                                        class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if: type == "Country"-->
+                    <!-- ko if: Flag -->
+                    <div class="col-md-4">
+                        <img data-bind="attr:{src: Flag}" class="img-fluid rounded-start card-img" alt="..." />
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #ffbf00"></h5>
+                            <p class="card-text" style="margin: 0; width: fit-content" data-bind="text: 'IOC: ' + IOC">
+                            <p class="card-text">
+                                <a class="btn btn-warning btn-xs"
+                                    data-bind="attr: { href:'./countryDetails.html?id=' + Id }" style="color: white"> <i
+                                        class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: Flag -->
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #ffbf00"></h5>
+                            <p class="card-text" style="margin: 0; width: fit-content" data-bind="text: 'IOC: ' + IOC">
+                            <p class="card-text">
+                                <a class="btn btn-warning btn-xs"
+                                    data-bind="attr: { href:'./countryDetails.html?id=' + Id }" style="color: white"> <i
+                                        class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
+                            </p>
                         </div>
                     </div>
                     <!-- /ko -->
