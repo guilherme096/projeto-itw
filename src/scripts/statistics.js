@@ -16,6 +16,7 @@ var vm = function () {
     self.games = ko.observableArray([]);
     self.athletesCountryGames = ko.observableArray([]);
     self.gameCompetitions = ko.observableArray([]);
+    self.medalsPerCountry = ko.observableArray([]);
 
 
     self.athletesPerGame = ko.observableArray([]);
@@ -53,12 +54,12 @@ var vm = function () {
     }
     function getAthletesPerGameGraph() {
         console.log('CALL: getAthletesPerGameGraph...');
-        google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
-        var _data = [['Game', 'Summer', 'Winter']]
-        for (var i = 0; i < self.athletesPerGame().length; i++) {
+        function drawChart() {
+            var _data = [['Game', 'Summer', 'Winter']]
+            for (var i = 0; i < self.athletesPerGame().length; i++) {
                 var name = self.athletesPerGame()[i].Name.split(" ");
                 var index = _data.findIndex(x => x[0] === name[0]);
                 if (index > -1) {
@@ -70,8 +71,7 @@ var vm = function () {
                         _data[index][1] = self.athletesPerGame()[i].Counter;
                     }
                 }
-                else
-                {
+                else {
                     if (name[1] === "Winter") {
                         _data.push([name[0], 0, self.athletesPerGame()[i].Counter]);
                     }
@@ -79,21 +79,21 @@ var vm = function () {
                         _data.push([name[0], self.athletesPerGame()[i].Counter, 0]);
                     }
                 }
+            }
+            console.log("array=", _data)
+
+            var data = google.visualization.arrayToDataTable(_data);
+
+            var options = {
+                chart: {
+                    title: 'Athletes per Game',
+                }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+            chart.draw(data, google.charts.Bar.convertOptions(options));
         }
-        console.log("array=", _data)
-        
-        var data = google.visualization.arrayToDataTable(_data);
-
-        var options = {
-          chart: {
-            title: 'Athletes per Game',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
 
     }
 
@@ -118,7 +118,7 @@ var vm = function () {
 
     function getGameCompetitionsGraph() {
         console.log('CALL: getGameCompetitionsGraph...');
-        google.charts.load('current', {'packages':['bar']});
+        google.charts.load('current', { 'packages': ['bar'] });
         google.charts.setOnLoadCallback(drawChart);
 
         function drawChart() {
@@ -136,8 +136,7 @@ var vm = function () {
                         _data[index][1] = self.gameCompetitions()[i].Counter;
                     }
                 }
-                else
-                {
+                else {
                     if (name[1] === "Winter") {
                         _data.push([name[0], 0, self.gameCompetitions()[i].Counter]);
                     }
@@ -162,6 +161,54 @@ var vm = function () {
         }
 
     }
+
+    async function getMedalsPerCountry() {
+        console.log('CALL: getGameMedals...');
+        await ajaxHelper('http://192.168.160.58/Olympics/api/Statistics/Medals_Country', 'GET').done(function (data) {
+            var _medalsPerCountry = [];
+            for (var i = 0; i < data.length; i++) {
+                _medalsPerCountry.push(
+                    [
+                        data[i].CountryName,
+                        data[i].Medals[0].Counter,
+
+                    ]);
+            }
+            self.medalsPerCountry(_medalsPerCountry);
+        }
+        );
+    }
+
+    function getMedalsPerCountryMap() {
+        google.charts.load('current', {
+            'packages': ['geochart'],
+            'mapsApiKey': 'AIzaSyAmbTn72ufvozbfkH3Aa_ag_fcmFTnovXA'
+        });
+        google.charts.setOnLoadCallback(drawRegionsMap);
+
+        function drawRegionsMap() {
+            var _data = [['Country', 'Medals']]
+            for (var i = 0; i < self.medalsPerCountry().length; i++) {
+                _data.push(self.medalsPerCountry()[i]);
+            }
+
+            console.log("array=", _data)
+            var data = google.visualization.arrayToDataTable(_data);
+
+            var options = {
+                chart: {
+                    title: 'Gold medals per country',
+                    subtitle: 'Every game'
+                }
+            };
+
+            var chart = new google.visualization.GeoChart(document.getElementById('regions_div'));
+
+            chart.draw(data, options);
+        }
+
+    }
+
 
     function sleep(milliseconds) {
         const start = Date.now();
@@ -196,6 +243,8 @@ var vm = function () {
         getAthletesPerGameGraph();
         await getGameCompetitions();
         getGameCompetitionsGraph();
+        await getMedalsPerCountry();
+        getMedalsPerCountryMap();
     };
 
     function hideLoading() {
@@ -206,7 +255,7 @@ var vm = function () {
     }
 
 
-    self.pesquisaGlobal = function() {
+    self.pesquisaGlobal = function () {
         console.log("pesquisa global...");
         console.log($("#searchbarglobal").val().toLowerCase());
         if ($("#searchbarglobal").val().toLowerCase().length > 0) {
