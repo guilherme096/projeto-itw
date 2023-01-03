@@ -151,6 +151,14 @@ var vm = function () {
     
 
 
+    self.pesquisaGlobal = function() {
+        console.log("pesquisa global...");
+        console.log($("#searchbarglobal").val().toLowerCase());
+        if ($("#searchbarglobal").val().toLowerCase().length > 0) {
+            window.location.href = "globalSearch.html?q=" + $("#searchbarglobal").val().toLowerCase(); //+"&view="+self.view();
+        }
+    }
+
     //--- start ....
     self.activate();
     console.log("VM initialized!");

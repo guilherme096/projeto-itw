@@ -15,7 +15,6 @@
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
         <style>
             .cards {
-                margin-right: 10px;
                 width: 24%;
                 height: fit-content;
                 border: 3px solid #0d6efd;
@@ -23,8 +22,7 @@
             .card-img {
                 height: 100%;
                 width: 100%;
-                object-fit: cover;
-                margin-left: -12px;
+                vertical-align: middle;
             }
             .active > .page-link,
             .page-link.active {
@@ -36,6 +34,18 @@
             }
             .page-link {
                 color: #0d6efd;
+            }
+            a {
+                color: inherit;
+                text-decoration: none;
+            }
+            a:hover {
+                transition: all 0.1s ease-in-out;
+                color: inherit;
+                text-decoration: none;
+            }
+            .shadow-sm {
+                box-shadow: 0 0.125rem 0.25rem #0d6efd !important;
             }
         </style>
     </head>
@@ -63,9 +73,16 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
                         </li>
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="statistics.html"><i class="fa fa-bar-chart text-info" aria-hidden="true"></i> Statistics</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-2">
+                        <li class="nav-item input-group w-100 p-1" style="min-width: 300px; height: 2em; vertical-align: middle">
+                            <input class="col-8 form-control form-degrade w-75" type="search" placeholder="Global Search" aria-label="Search" id="searchbarglobal" />
+                            <button class="col-4 btn btn-xs w-25" data-bind="click:pesquisaGlobal" style="border: 1px solid black" type="submit"><i class="fas fa-search"></i></button>
+                        </li>
+                        <li class="nav-item w-100">
                             <a href="favorites.html" class="nav-link active"><i class="fa fa-heart-o text-danger"></i> Favorites</a>
                         </li>
                     </ul>
@@ -159,46 +176,48 @@
             </div>
             <!-- /ko -->
             <!-- /ko -->
-
-            <!-- /pagination -->
         </div>
+
+        <!-- /pagination -->
+
         <div class="container">
-            <div class="row row-cols-4" data-bind="foreach: records, visible: view() === 'card'">
-                <div class="card mb-3 cards" style="max-width: 540px">
-                    <div class="row g-0">
-                        <!-- ko if: Photo -->
-                        <div class="col-md-4">
-                            <img data-bind="attr:{src: Photo}" class="img-fluid rounded-start card-img" alt="..." />
-                        </div>
-                        <div class="col-md-8">
+            <div class="row row-cols-4 mx-auto mb-4" data-bind="foreach: records, visible: view() === 'card'">
+                <a data-bind="attr: {href: './modalityDetails.html?id=' + Id}" class="card p-0 m-4 shadow-sm" style="max-width: 540px" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'">
+                    <!-- ko if : Photo != null && Photo != "" -->
+                    <div class="row row-cols-2">
+                        <div class="col-7">
                             <div class="card-body">
                                 <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #0d6efd"></h5>
-                                <p class="card-text" data-bind="text: 'ID: ' + Id"></p>
-                                <p class="card-text">
-                                    <a class="btn btn-primary btn-xs" data-bind="attr: { href:'./modalityDetails.html?id=' + Id }" style="color: white"> <i class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
-                                    <button data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-default btn-xs btn-favourite">
+                                <p class="card-text" style="margin: 0; width: fit-content" data-bind="text: 'Id: ' + Id"></p>
+
+                                <span class="position-absolute top-0 start-100 translate-middle border border-light rounded-circle" style="padding: 2px; background-color: #0d6efd; z-index: 10">
+                                    <button style="font-size: large" data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-xs btn-favourite text-danger">
                                         <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Favorite"></i>
                                     </button>
-                                </p>
+                                </span>
                             </div>
                         </div>
-                        <!-- /ko -->
-                        <!-- ko ifnot: Photo -->
-                        <div class="col-md-12">
-                            <div class="card-body">
-                                <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #0d6efd"></h5>
-                                <p class="card-text" data-bind="text: 'ID: ' + Id"></p>
-                                <p class="card-text">
-                                    <a class="btn btn-primary btn-xs" data-bind="attr: { href:'./modalityDetails.html?id=' + Id }" style="color: white"> <i class="fa-solid fa-plus" title="Selecione para ver detalhes"></i> Details </a>
-                                    <button data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-default btn-xs btn-favourite">
-                                        <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Favorite"></i>
-                                    </button>
-                                </p>
-                            </div>
+
+                        <div class="col-5">
+                            <img data-bind="attr:{src: Photo}" class="img-fluid rounded-end card-img" alt="Photo" />
                         </div>
-                        <!-- /ko -->
                     </div>
-                </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot : Photo != null && Photo != "" -->
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <h5 class="card-title" data-bind="text:Name" style="font-weight: bold; color: #0d6efd"></h5>
+                            <p class="card-text" style="margin: 0; width: fit-content" data-bind="text: 'Id: ' + Id"></p>
+
+                            <span class="position-absolute top-0 start-100 translate-middle border border-light rounded-circle" style="padding: 2px; background-color: #0d6efd; z-index: 10">
+                                <button style="font-size: large" data-bind="click: () => $parent.toggleFavourite(Id), attr : { 'id': 'favourite_' + Id }" id="heartbt" class="btn btn-xs btn-favourite text-danger">
+                                    <i data-bind="attr: {'class': $parent.favourites().includes(Id)? 'fa fa-heart' : 'fa fa-heart-o'}" class="fa fa-heart-o" title="Favorite"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </a>
             </div>
 
             <table class="table table-striped table-sm small" data-bind="visible: view() === 'table'">

@@ -75,9 +75,16 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
                         </li>
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="statistics.html"><i class="fa fa-bar-chart text-info" aria-hidden="true"></i> Statistics</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-2">
+                        <li class="nav-item input-group w-100 p-1" style="min-width: 300px; height: 2em; vertical-align: middle">
+                            <input class="col-8 form-control form-degrade w-75" type="search" placeholder="Global Search" aria-label="Search" id="searchbarglobal" />
+                            <button class="col-4 btn btn-xs w-25" data-bind="click:pesquisaGlobal" style="border: 1px solid black" type="submit"><i class="fas fa-search"></i></button>
+                        </li>
+                        <li class="nav-item w-100">
                             <a href="favorites.html" class="nav-link active"><i class="fa fa-heart-o text-danger"></i> Favorites</a>
                         </li>
                     </ul>
@@ -133,7 +140,7 @@
                                                         <li class="list-group-item" style="width: 100px">Results</li>
                                                         <li class="list-group-item" data-bind="text: Results"></li>
                                                     </ul>
-                                                    <a class="btn btn-warning" data-bind="attr:{href: 'gameDetails.html?id=' + Id}" style="margin-top: 10px">More details</a>
+                                                    <a class="btn btn-warning" data-bind="attr:{href: 'competitionDetails.html?id=' + Id}" style="margin-top: 10px">More details</a>
                                                 </div>
                                             </div>
                                         </div>

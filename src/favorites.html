@@ -18,7 +18,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="index.html" tabindex="Olympics"><img src="http://192.168.160.58/Olympics/Images/Olympic_rings.svg" height="24" /></a>
+                <a class="navbar-brand" href="index.html" tabindex="Olympics"><img src="../images/Olympic_rings.svg" height="24" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -39,136 +39,147 @@
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="modalities.html"><i class="fa fa-soccer-ball-o text-primary"></i> Modalities</a>
                         </li>
-                        <!-- <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="statistics0.html"><i class="fa fa-bar-chart text-info"></i> Statistics</a>
-                        </li> -->
-                    </ul>
-                    <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="statistics.html"><i class="fa fa-bar-chart text-info" aria-hidden="true"></i> Statistics</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav mb-2">
+                        <li class="nav-item input-group w-100 p-1" style="min-width: 300px; height: 2em; vertical-align: middle">
+                            <input class="col-8 form-control form-degrade w-75" type="search" placeholder="Global Search" aria-label="Search" id="searchbarglobal" />
+                            <button class="col-4 btn btn-xs w-25" data-bind="click:pesquisaGlobal" style="border: 1px solid black" type="submit" id="btnsearchbarglobal"><i class="fas fa-search"></i></button>
+                        </li>
+                        <li class="nav-item w-100">
                             <a href="favorites.html" class="nav-link active"><i class="fa fa-heart-o text-danger"></i> Favorites</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
+
         <div class="container" style="margin-top: 100px; margin-bottom: 100px">
-            <div class="py-2 mb-3">
-                <h2 style="color: orange"><strong> Athletes</strong></h2>
+            <div class="container">
+                <div class="row row-cols-2">
+                    <div class="col-6">
+                        <h2 class="text-warning" style="margin-top: 10px"><b> Athletes</b></h2>
+
+                        <table class="table table-striped table-sm small">
+                            <thead class="bg-dark text-light">
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Sex</th>
+                                    <th scope="col" class="text-right"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-favourites">
+                                <tr>
+                                    <td class="align-middle" data-bind="text:Id"></td>
+                                    <td class="align-middle" data-bind="text:Name"></td>
+                                    <td class="align-middle" data-bind="text:Sex"></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-6">
+                        <h2 style="color: black; text-align: right; margin-top: 10px"><b> Competitions</b></h2>
+
+                        <table class="table table-striped table-sm small">
+                            <thead class="bg-dark text-light">
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Modality</th>
+                                    <th scope="col" class="text-right"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-favourites2">
+                                <tr>
+                                    <td class="align-middle" data-bind="text:Id"></td>
+                                    <td class="align-middle" data-bind="text: Name"></td>
+                                    <td class="align-middle" data-bind="text:Modality"></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row row-cols-2">
+                    <div class="col-6">
+                        <h2 class="text-danger" style="margin-top: 10px"><b> Countries</b></h2>
+
+                        <table class="table table-striped table-sm small">
+                            <thead class="bg-dark text-light">
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Country Name</th>
+                                    <th scope="col">IOC</th>
+                                    <th scope="col" class="text-right"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-favourites3">
+                                <tr>
+                                    <td class="align-middle" data-bind="text:Id"></td>
+                                    <td class="align-middle" data-bind="text:Name"></td>
+                                    <td class="align-middle" data-bind="text:IOC"></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-6">
+                        <h2 class="text-success" style="text-align: right; margin-top: 10px"><b> Games</b></h2>
+
+                        <table class="table table-striped table-sm small">
+                            <thead class="bg-dark text-light">
+                                <tr>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Year</th>
+                                    <th scope="col">Country Name</th>
+                                    <th scope="col" class="text-right"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-favourites4">
+                                <tr>
+                                    <td class="align-middle" data-bind="text:Id"></td>
+                                    <td class="align-middle" data-bind="text:Name"></td>
+                                    <td class="align-middle" data-bind="text:Year"></td>
+                                    <td class="align-middle" data-bind="text:CountryName"></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
 
-            <table class="table table-striped table-sm small">
-                <thead class="bg-dark text-light">
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Sex</th>
-                        <th scope="col" class="text-right"></th>
-                    </tr>
-                </thead>
-                <tbody id="table-favourites">
-                    <tr>
-                        <td class="align-middle" data-bind="text:Id"></td>
-                        <td class="align-middle" data-bind="text:Name"></td>
-                        <td class="align-middle" data-bind="text:Sex"></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr />
+            <div class="container">
+                <h2 class="text-primary" style="text-align: center; margin-top: 10px"><b>Modalities</b></h2>
 
-            <div class="py-2 mb-3">
-                <h2 style="color: black"><strong> Competitions</strong></h2>
+                <table class="table table-striped table-sm small">
+                    <thead class="bg-dark text-light">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+
+                            <th scope="col" class="text-right"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-favourites5">
+                        <tr>
+                            <td class="align-middle" data-bind="text:Id"></td>
+                            <td class="align-middle" data-bind="text:Name"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <table class="table table-striped table-sm small">
-                <thead class="bg-dark text-light">
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Modality</th>
-                        <th scope="col" class="text-right"></th>
-                    </tr>
-                </thead>
-                <tbody id="table-favourites2">
-                    <tr>
-                        <td class="align-middle" data-bind="text:Id"></td>
-                        <td class="align-middle" data-bind="text: Name"></td>
-                        <td class="align-middle" data-bind="text:Modality"></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr />
-            <div class="py-2 mb-3">
-                <h2 style="color: red"><strong> Countries</strong></h2>
+            <div class="row">
+                <i class="d-grid d-sm-flex justify-content-center"><a onClick="history.go(-1)" class="btn btn-secondary btn-danger col-lg-1 col-md-2 col-sm-12" tabindex="-1" role="button" aria-disabled="true">Previous page</a></i>
             </div>
-
-            <table class="table table-striped table-sm small">
-                <thead class="bg-dark text-light">
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Country Name</th>
-                        <th scope="col">IOC</th>
-                        <th scope="col" class="text-right"></th>
-                    </tr>
-                </thead>
-                <tbody id="table-favourites3">
-                    <tr>
-                        <td class="align-middle" data-bind="text:Id"></td>
-                        <td class="align-middle" data-bind="text:Name"></td>
-                        <td class="align-middle" data-bind="text:IOC"></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr />
-            <div class="py-2 mb-3">
-                <h2 style="color: darkgreen"><strong> Games</strong></h2>
-            </div>
-
-            <table class="table table-striped table-sm small">
-                <thead class="bg-dark text-light">
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Year</th>
-                        <th scope="col">Country Name</th>
-                        <th scope="col" class="text-right"></th>
-                    </tr>
-                </thead>
-                <tbody id="table-favourites4">
-                    <tr>
-                        <td class="align-middle" data-bind="text:Id"></td>
-                        <td class="align-middle" data-bind="text:Name"></td>
-                        <td class="align-middle" data-bind="text:Year"></td>
-                        <td class="align-middle" data-bind="text:CountryName"></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr />
-            <div class="py-2 mb-3">
-                <h2 style="color: dodgerblue"><strong> Modalities</strong></h2>
-            </div>
-
-            <table class="table table-striped table-sm small">
-                <thead class="bg-dark text-light">
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Name</th>
-
-                        <th scope="col" class="text-right"></th>
-                    </tr>
-                </thead>
-                <tbody id="table-favourites5">
-                    <tr>
-                        <td class="align-middle" data-bind="text:Id"></td>
-                        <td class="align-middle" data-bind="text:Name"></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <hr />
         </div>
 
         <!-- Modal -->
@@ -186,9 +197,6 @@
         </div>
 
         <div class="container" style="margin-top: 25px">
-            <div class="row">
-                <i class="d-grid d-sm-flex justify-content-sm-end"><a onClick="history.go(-1)" class="btn btn-secondary btn-danger col-lg-1 col-md-2 col-sm-12" align="center" tabindex="-1" role="button" aria-disabled="true">Back</a></i>
-            </div>
             <nav class="navbar navbar-light bg-light fixed-bottom">
                 <div class="container small">
                     <div class="navbar-text">&copy; Introdução as Tecnologias Web - 2022/23</div>
@@ -203,5 +211,13 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.1/knockout-latest.js" integrity="sha512-2AL/VEauKkZqQU9BHgnv48OhXcJPx9vdzxN1JrKDVc4FPU/MEE/BZ6d9l0mP7VmvLsjtYwqiYQpDskK9dG8KBA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
         <script src="./scripts/favorites.js"></script>
+        <script>
+            $(document).ready(function () {
+                $("#btnsearchbarglobal").click(function () {
+                    var search = $("#searchbarglobal").val();
+                    window.location.href = "globalSearch.html?q=" + search;
+                });
+            });
+        </script>
     </body>
 </html>
