@@ -15,6 +15,9 @@ var vm = function () {
     self.currentGame = ko.observable('');
     self.games = ko.observableArray([]);
     self.athletesCountryGames = ko.observableArray([]);
+
+
+    self.athletesPerGame = ko.observableArray([]);
     //--- Internal functions
     function ajaxHelper(uri, method, data) {
         self.error(''); // Clear error message
@@ -33,7 +36,7 @@ var vm = function () {
 
     async function getIOCs() {
         console.log('CALL: getIOC...');
-        await ajaxHelper('http://192.168.160.58/Olympics/api/Countries', 'GET').done(function (data) {
+        ajaxHelper('http://192.168.160.58/Olympics/api/Countries?page=1&pagesize=50', 'GET').done(function (data) {
             var _IOCs = [];
             for (var i = 0; i < data.Records.length; i++) {
                 _IOCs.push(
@@ -50,7 +53,7 @@ var vm = function () {
     async function getGames() {
         console.log('CALL: getGames...');
 
-        await ajaxHelper('http://192.168.160.58/Olympics/api/Games', 'GET').done(function (data) {
+        ajaxHelper('http://192.168.160.58/Olympics/api/Games', 'GET').done(function (data) {
             var _games = [];
             for (var i = 0; i < data.Records.length; i++) {
                 _games.push(
@@ -63,6 +66,67 @@ var vm = function () {
         });
     }
 
+    async function getAthletesPerGame() {
+        console.log('CALL: getAthletesPerGame...');
+        await ajaxHelper('http://192.168.160.58/Olympics/api/Statistics/Games_Athletes', 'GET').done(function (data) {
+            var _athletesPerGame = [];
+            for (var i = 0; i < data.length; i++) {
+                _athletesPerGame.push(
+                    {
+                        Name: data[i].Name,
+                        Counter: data[i].Counter
+                    });
+            }
+            self.athletesPerGame(_athletesPerGame);
+        }
+        );
+    }
+    function getAthletesPerGameGraph() {
+        console.log('CALL: getAthletesPerGameGraph...');
+        google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var _data = [['Game', 'Summer', 'Winter']]
+        for (var i = 0; i < self.athletesPerGame().length; i++) {
+                var name = self.athletesPerGame()[i].Name.split(" ");
+                var index = _data.findIndex(x => x[0] === name[0]);
+                if (index > -1) {
+                    // if name[1] is Winter, then add to the second column, if not, add to the first column
+                    if (name[1] === "Winter") {
+                        _data[index][2] = self.athletesPerGame()[i].Counter;
+                    }
+                    else {
+                        _data[index][1] = self.athletesPerGame()[i].Counter;
+                    }
+                }
+                else
+                {
+                    if (name[1] === "Winter") {
+                        _data.push([name[0], 0, self.athletesPerGame()[i].Counter]);
+                    }
+                    else {
+                        _data.push([name[0], self.athletesPerGame()[i].Counter, 0]);
+                    }
+                }
+        }
+        console.log("array=", _data)
+        
+        var data = google.visualization.arrayToDataTable(_data);
+
+        var options = {
+          chart: {
+            title: 'Athletes per Game',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+
+    }
+
     async function getAthletesCountryGames() {
         console.log('CALL: getAthletesCountryGames...');
         self.loadingMap(true);
@@ -73,13 +137,14 @@ var vm = function () {
                     Country  : self.IOCs()[i].countryName,
                     count: data.length
                 };
+                console.log('http://192.168.160.58/Olympics/api/Statistics/Athlete_Country?id=' + self.currentGame() + '&IOC=' + self.IOCs()[i].name)
                 new_list.push(_country);
             });
         }
+        console.log("new_list=", new_list);
         self.athletesCountryGames(new_list);
         await getMap();
     }
-
 
     function sleep(milliseconds) {
         const start = Date.now();
@@ -112,8 +177,9 @@ var vm = function () {
         console.log('CALL: activate...');
         self.currentGame('51');
         await getGames();
-        await getIOCs();
-        await getAthletesCountryGames();
+        await getAthletesPerGame();
+        getAthletesPerGameGraph();
+
 
     };
 
@@ -124,7 +190,6 @@ var vm = function () {
         $('#collapseTwo').collapse('hide');
         self.currentGame($this.attr('id'));
         console.log("currentGame=", self.currentGame());
-        getAthletesCountryGames();
     });
 
     async function getMap(){
