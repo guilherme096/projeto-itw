@@ -32,4 +32,5 @@ export const flagCodes = {
     "Germany": "DE",
     "Yougoslavia": "YUG",
     "Brazil": "BRA",
+    "Netherlands": "NLD",
 };
