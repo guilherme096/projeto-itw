@@ -122,30 +122,32 @@
                                 </h2>
                                 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        <!-- ko foreach: Modalities -->
-                                        <div class="col-5" style="margin-top: 20px">
-                                            <div class="card" style="width: 100%">
-                                                <img data-bind="attr:{src: Photo}" class="card-img-top" style="max-height: 300px" />
-                                                <div class="card-body">
-                                                    <h5 class="card-title" data-bind="text: Name"></h5>
-                                                    <ul class="card-text list-group list-group-horizontal">
-                                                        <li class="list-group-item" style="width: 100px">ID</li>
-                                                        <li class="list-group-item" data-bind="text: Id"></li>
-                                                    </ul>
-                                                    <ul class="card-text list-group list-group-horizontal">
-                                                        <li class="list-group-item" style="width: 100px">Modality</li>
-                                                        <li class="list-group-item" data-bind="text: Modality"></li>
-                                                    </ul>
-                                                    <ul class="card-text list-group list-group-horizontal">
-                                                        <li class="list-group-item" style="width: 100px">Results</li>
-                                                        <li class="list-group-item" data-bind="text: Results"></li>
-                                                    </ul>
-                                                    <a class="btn btn-warning" data-bind="attr:{href: 'competitionDetails.html?id=' + Id}" style="margin-top: 10px">More details</a>
+                                        <div class="row row-cols-2">
+                                            <!-- ko foreach: Modalities -->
+                                            <div class="col-5" style="margin-top: 20px">
+                                                <div class="card" style="width: 100%">
+                                                    <img data-bind="attr:{src: Photo}" class="card-img-top" style="max-height: 300px" />
+                                                    <div class="card-body">
+                                                        <h5 class="card-title" data-bind="text: Name"></h5>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">ID</li>
+                                                            <li class="list-group-item" data-bind="text: Id"></li>
+                                                        </ul>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">Modality</li>
+                                                            <li class="list-group-item" data-bind="text: Modality"></li>
+                                                        </ul>
+                                                        <ul class="card-text list-group list-group-horizontal">
+                                                            <li class="list-group-item" style="width: 100px">Results</li>
+                                                            <li class="list-group-item" data-bind="text: Results"></li>
+                                                        </ul>
+                                                        <a class="btn btn-warning" data-bind="attr:{href: 'competitionDetails.html?id=' + Id}" style="margin-top: 10px">More details</a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <!-- /ko -->
+                                            <!-- /ko -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
