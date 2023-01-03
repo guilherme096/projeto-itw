@@ -78,18 +78,20 @@
         </nav>
         <!-- Working Area -->
         <div class="container" style="margin-top: 80px">
-            <div class="row">
-                <div class="col-8 border-bottom py-2 mb-2">
+            <div class="row row-cols-2">
+                <div class="col-sm-4 col-md-8 border-bottom py-2 mb-2">
                     <h2 data-bind="text:displayName"></h2>
                 </div>
-                <div class="col-4 border-bottom py-2 mb-2">
+                <div class="col-sm-8 col-md-4 border-bottom py-2 mb-2">
                     <div class="float-end input-group">
                         <div class="form-outline" style="width: 90%">
                             <input type="search" id="searchbar" class="form-control" placeholder="Search..." />
                         </div>
-                        <button type="button" class="btn btn-primary" data-bind="click:pesquisa" style="width: 10%; height: 40px; background-color: black; border-width: 0px">
-                            <i class="fas fa-search"></i>
-                        </button>
+                        <span class="input-group-btn" style="width: 10%">
+                            <button type="button" class="btn btn-primary" data-bind="click:pesquisa" style="height: 40px; background-color: black; border-width: 0px">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -104,8 +106,8 @@
                     <span data-bind="html: 'Games: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
                 </p>
                 <div class="btn-group col-1 m-auto" role="group" aria-label="View options" style="display: flex; align-items: center">
-                    <button type="button" class="btn btn-primary btn-sm" style="color: white; background-color: black; border: 1px solid white" data-bind="click: toggleCard, css: { 'active': view() === 'card' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-table"></i></button>
-                    <button type="button" class="btn btn-primary btn-sm" style="color: white; background-color: black; border: 1px solid white" data-bind="click: toggleTable, css: { 'active': view() === 'table' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-list"></i></button>
+                    <button type="button" class="d-none d-lg-block btn btn-primary btn-sm" style="color: white; background-color: black; border: 1px solid white" data-bind="click: toggleCard, css: { 'active': view() === 'card' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-table"></i></button>
+                    <button type="button" class="d-none d-lg-block btn btn-primary btn-sm" style="color: white; background-color: black; border: 1px solid white" data-bind="click: toggleTable, css: { 'active': view() === 'table' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-list"></i></button>
                 </div>
                 <div class="col-5 my-0 ms-auto pt-3">
                     <ul class="pagination float-end">
@@ -166,7 +168,12 @@
             <!-- /ko -->
 
             <!-- /pagination -->
-
+            <div class="row small d-lg-none">
+                <div class="btn-group col-1 m-auto" role="group" aria-label="View options" style="display: flex; align-items: center">
+                    <button type="button" class="d-lg-none btn btn-warning btn-sm" style="color: white; background-color: black; border: 1px solid white" data-bind="click: toggleCard, css: { 'active': view() === 'card' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-table"></i></button>
+                    <button type="button" class="d-lg-none btn btn-warning btn-sm" style="color: white; background-color: black; border: 1px solid white" data-bind="click: toggleTable, css: { 'active': view() === 'table' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-list"></i></button>
+                </div>
+            </div>
             <div class="row row-cols-4 mx-auto mb-4" data-bind="foreach: records, visible: view() === 'card'">
                 <a data-bind="attr: {href: './competitionDetails.html?id=' + Id}" class="card p-0 m-4 shadow-sm" style="max-width: 540px" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'">
                     <!-- ko if: Photo -->
