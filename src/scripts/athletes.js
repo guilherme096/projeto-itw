@@ -202,7 +202,7 @@ var vm = function () {
         console.log("pesquisa global...");
         console.log($("#searchbarglobal").val().toLowerCase());
         if ($("#searchbarglobal").val().toLowerCase().length > 0) {
-            window.location.href = "globalSearch.html?q=" + $("#searchbarglobal").val().toLowerCase(); //+"&view="+self.view();
+            window.location.href = "globalSearch.html?q=" + $("#searchbarglobal").val().toLowerCase();
         }
     }
 
@@ -223,24 +223,32 @@ var vm = function () {
     self.pesquisado = ko.observable(getUrlParameter('search'));
     self.filtroAplicar = ko.observable(getUrlParameter('sortby'));
     console.log("pg = ",pg);
+    console.log("pesquisado = ", self.pesquisado());
+    console.log("filtroAplicar = ", self.filtroAplicar());
     if (self.pesquisado() == undefined || self.pesquisado() == "" || self.pesquisado() == null) {
         if (self.filtroAplicar() == undefined || self.filtroAplicar() == "" || self.filtroAplicar() == null) {
-            if (pg == undefined)
+            if (pg == undefined){
+                console.log("activate1");
                 self.activate(1);
-            else {
+            }else {
+                console.log("activate1");
                 self.activate(pg);
             }
         } else {
-            if (pg == undefined)
+            if (pg == undefined){
+                console.log("activate3");
                 self.activate3(self.filtroAplicar(), 1);
-            else {
+            }else {
+                console.log("activate3")
                 self.activate3(self.filtroAplicar(), pg);
             }
         }
     }else {
-        if (pg == undefined)
+        if (pg == undefined){
+            console.log("activate2")
             self.activate2(self.pesquisado(), 1);
-        else {
+        }else {
+            console.log("activate2")
             self.activate2(self.pesquisado(), pg);
         }
         self.displayName = 'Found results for ' + self.pesquisado();

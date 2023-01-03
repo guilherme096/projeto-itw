@@ -115,8 +115,7 @@
 
             <!-- pagination -->
 
-            <!-- ko ifnot: pesquisado() -->
-            <!-- ko if:records().length > 0 -->
+            <!-- ko if: (!pesquisado() && records().length > 0 && !filtroAplicar()) -->
             <div class="row small">
                 <p class="col-4 mr-auto pt-2">
                     <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
@@ -174,6 +173,65 @@
                 </div>
             </div>
             <!-- /ko -->
+            <!-- ko if: (!pesquisado() && records().length > 0 && filtroAplicar()) -->
+
+            <div class="row small">
+                <p class="col-4 mr-auto pt-2">
+                    <span data-bind="html: 'Page: ' + currentPage() + ' of ' + totalPages()"></span><br />
+                    <span data-bind="html: 'Athletes: '+ fromRecord() + '-' + toRecord() + ' of ' + totalRecords()"></span>
+                </p>
+                <div class="col-1 pt-2">
+                    <div class="btn-group dropend">
+                        <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Filter</button>
+                        <ul class="dropdown-menu">
+                            <li><button class="dropdown-item" type="button" data-bind="click:filtrar" value="Id">Id</button></li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="NameUp">Name <i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="NameDn">Name <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="HeightUp">Height <i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="HeightDn">Height <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="SexUp">Sex <i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+                            </li>
+                            <li>
+                                <button class="dropdown-item" type="button" data-bind="click:filtrar" value="SexDn">Sex <i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="btn-group col-1 m-auto" role="group" aria-label="View options" style="display: flex; align-items: center">
+                    <button type="button" class="btn btn-warning btn-sm" style="color: white; border: 1px solid white" data-bind="click: toggleCard, css: { 'active': view() === 'card' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-table"></i></button>
+                    <button type="button" class="btn btn-warning btn-sm" style="color: white; border: 1px solid white" data-bind="click: toggleTable, css: { 'active': view() === 'table' }" onmouseenter="this.style.transform = 'scale(1.05)'" onmouseleave=" this.style.transform='scale(1)'"><i class="fa-solid fa-list"></i></button>
+                </div>
+                <div class="col-4 ms-auto my-0 pt-3">
+                    <ul class="pagination float-end">
+                        <!-- ko if: currentPage() > 5 && totalPages() > 10 -->
+                        <li class="page-item float-end"><a class="page-link" title="First Page" data-bind="attr: { href: 'athletes.html?sortby=' + filtroAplicar() + '&page=1&pagesize=20&view=' + view(),  rel:'prev'}">⇤</a></li>
+                        <li class="page-item float-end"><a class="page-link" title="Previous Page" data-bind="attr: { href: 'athletes.html?sortby=' + filtroAplicar() + '&page='+ previousPage() +'&pagesize=20&view=' + view(),  rel:'prev'}">←</a></li>
+                        <!-- /ko -->
+                        <!-- ko foreach: pageArray()-->
+                        <!-- ko if:$data == $parent.currentPage() -->
+                        <li class="active page-item"><a class="page-link" data-bind="attr: { title:'Current Page ' + $data }, text: $data"></a></li>
+                        <!-- /ko -->
+                        <!-- ko if:$data != $parent.currentPage() -->
+                        <li class="page-item"><a class="page-link" data-bind="attr: { href: 'athletes.html?sortby=' + $parent.filtroAplicar() + '&page=' + $data + '&pagesize=20&view=' + $parent.view(),title:'Goto Page ' + $data }, text:$data"></a></li>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: currentPage() < totalPages() - 4 && totalPages() > 9 -->
+                        <li class="page-item"><a class="page-link" title="Next Page" data-bind="attr: { href: 'athletes.html?sortby=' + filtroAplicar() + '&page=' + nextPage() + '&pagesize=20&view=' + view(), rel:'next' }">→</a></li>
+                        <li class="page-item"><a class="page-link" title="Last Page" data-bind="attr: { href: 'athletes.html?sortby=' + filtroAplicar() + '&page=' + totalPages() + '&pagesize=20&view=' + view() }">⇥</a></li>
+                        <!-- /ko -->
+                    </ul>
+                </div>
+            </div>
+
             <!-- /ko -->
             <!-- ko if: pesquisado() -->
             <!-- ko if: records().length > 0 -->
